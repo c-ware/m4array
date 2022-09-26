@@ -1,0 +1,99 @@
+.TH "m4array" "cware" "Sep 26, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+m4array - an implementation of a dynamic array in m4
+.br
+.SH SYNOPSIS
+.br
+include(m4array/m4array.m4)
+.br
+
+.br
+\fBdefine(M4ARRAY_INIT);\fR
+.br
+\fBdefine(M4ARRAY_APPEND);\fR
+.br
+\fBdefine(M4ARRAY_INSERT);\fR
+.br
+\fBdefine(M4ARRAY_POP);\fR
+.br
+\fBdefine(M4ARRAY_FIND);\fR
+.br
+\fBdefine(M4ARRAY_FOREACH);\fR
+.br
+\fBdefine(M4ARRAY_FREE);\fR
+.br
+.SH DESCRIPTION
+.br
+An implementation of a dynamic array in \fBm4\fR(1). It is type safe, and provides
+.br
+all of the basic necessities when it comes to a dynamic array, including insertion,
+.br
+appending, searching, and more. This implmenetation is highly portable. It will compile
+.br
+on each of the following operating systems without error (assuming code is preprocessed
+.br
+with m4):
+.br
+   - FreeBSD 13.1
+.br
+   - NetBSD 9.3
+.br
+   - OpenBSD 7.1
+.br
+   - OpenSolaris 10
+.br
+   - ULTRIX 4.5
+.br
+   - QuasijarusBSD 4.3
+.br
+   - OS/2 4.52 Warp
+.br
+   - DragonflyBSD 6.2.1
+.br
+   - NeXTSTEP 4.2
+.br
+   - UNIXWare 7.1.4
+.br
+
+.br
+As stated above, it is recommended that you preprocess your \fBm4\fR(1) into C files before shipping
+.br
+the code. This makes your code much portable as not all systems have \fBm4\fR(1).
+.br
+
+.br
+Below is a table of the manual of each of operation, along with a brief description.
+.br
+.TS
+tab(;);
+l l l
+_ _ _
+l l l
+.
+Manual;Description
+M4ARRAY_INIT(cware);initialize a new array
+M4ARRAY_APPEND(cware);append a value
+M4ARRAY_INSERT(cware);insert a value at a specific index
+M4ARRAY_POP(cware);pop a value out of an index
+M4ARRAY_FIND(cware);find the location of a value based off a predicate
+M4ARRAY_FOREACH(cware);run an operaton for each element
+.TE
+.SH EXAMPLES
+.br
+This is a table of documentation which holds example code, along with a
+.br
+brief description of it, and the macros it involves.
+.br
+
+.br
+.TS
+tab(;);
+l l l
+_ _ _
+l l l
+.
+Manual;Description;Macros
+m4array-examples-join(cware);joining strings;init,foreach,append,free
+.TE

@@ -1,0 +1,37 @@
+.TH "M4ARRAY_APPEND" "cware" "Sep 26, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+M4ARRAY_APPEND - append to an array
+.br
+.SH SYNOPSIS
+.br
+include(m4array/m4array.m4)
+.br
+
+.br
+\fBdefine(M4ARRAY_APPEND);\fR
+.br
+.SH DESCRIPTION
+.br
+This macro will append a value to an array given, and resize the
+.br
+array if needed using the M4ARRAY_NEXT_SIZE(cware) macro.
+.br
+
+.br
+
+.br
+\fI$1\fR will be pointer to the array to append to
+.br
+\fI$2\fR will be the value to append
+.br
+\fI$3\fR will be the namespace of the array
+.br
+.SH EXAMPLES
+.br
+For examples, please see the examples section in \fBm4array\fR(cware)
+.br
+.SH SEE ALSO
+.br
+m4array(cware)

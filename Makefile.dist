@@ -1,0 +1,101 @@
+# A collection of m4 macros to make writing Makefiles easier.
+# Recommended for a two-pass m4 system.
+
+
+
+
+
+
+
+
+
+
+
+# Define the implicit rules
+
+
+
+
+
+
+# A collection of m4 macros to make writing Makefiles easier.
+# Recommended for a two-pass m4 system.
+
+
+
+
+
+
+
+
+
+
+
+# Define the implicit rules
+
+
+
+
+
+
+
+M4=m4
+
+CC=cc
+CFLAGS=-Wall -Wextra -Wpedantic
+SRCS=tests/pop.c tests/insert.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c  examples/join.c 
+TESTS=tests/pop tests/insert tests/init tests/foreach tests/free tests/find tests/append 
+EXAMPLES=examples/join 
+
+all: $(SRCS) $(TESTS) $(EXAMPLES)
+
+clean:
+	rm -f $(TESTS)
+	rm -f $(EXAMPLES)
+
+dist: $(SRCS)
+
+dist_clean:
+	rm -rf $(SRCS)
+
+.SUFFIXES:
+
+tests/pop.c: tests/pop.m4 
+	$(M4) tests/pop.m4 > tests/pop.c
+tests/insert.c: tests/insert.m4 
+	$(M4) tests/insert.m4 > tests/insert.c
+tests/init.c: tests/init.m4 
+	$(M4) tests/init.m4 > tests/init.c
+tests/foreach.c: tests/foreach.m4 
+	$(M4) tests/foreach.m4 > tests/foreach.c
+tests/free.c: tests/free.m4 
+	$(M4) tests/free.m4 > tests/free.c
+tests/find.c: tests/find.m4 
+	$(M4) tests/find.m4 > tests/find.c
+tests/append.c: tests/append.m4 
+	$(M4) tests/append.m4 > tests/append.c
+
+tests/pop: tests/pop.c 
+	$(CC) tests/pop.c $(CFLAGS) -o tests/pop
+tests/insert: tests/insert.c 
+	$(CC) tests/insert.c $(CFLAGS) -o tests/insert
+tests/init: tests/init.c 
+	$(CC) tests/init.c $(CFLAGS) -o tests/init
+tests/foreach: tests/foreach.c 
+	$(CC) tests/foreach.c $(CFLAGS) -o tests/foreach
+tests/free: tests/free.c 
+	$(CC) tests/free.c $(CFLAGS) -o tests/free
+tests/find: tests/find.c 
+	$(CC) tests/find.c $(CFLAGS) -o tests/find
+tests/append: tests/append.c 
+	$(CC) tests/append.c $(CFLAGS) -o tests/append
+
+
+examples/join.c: examples/join.m4 
+	$(M4) examples/join.m4 > examples/join.c
+
+examples/join: examples/join.c 
+	$(CC) examples/join.c $(CFLAGS) -o examples/join
+
+
+.PHONY: all clean dist dist_clean

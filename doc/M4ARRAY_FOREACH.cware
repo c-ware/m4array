@@ -1,0 +1,37 @@
+.TH "M4ARRAY_FOREACH" "cware" "Sep 26, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+M4ARRAY_FOREACH - run code for each element in an array
+.br
+.SH SYNOPSIS
+.br
+include(m4array/m4array.m4)
+.br
+
+.br
+\fBdefine(M4ARRAY_FOREACH);\fR
+.br
+.SH DESCRIPTION
+.br
+This macro will run an operation for each element in an array. The
+.br
+operation will have the element of the array passed as the first
+.br
+argument.
+.br
+
+.br
+
+.br
+\fI$1\fR will be pointer to the array to loop over
+.br
+\fI$2\fR will be the macro to execute for each element
+.br
+.SH EXAMPLES
+.br
+For examples, please see the examples section in \fBm4array\fR(cware)
+.br
+.SH SEE ALSO
+.br
+m4array(cware)

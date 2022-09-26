@@ -1,0 +1,108 @@
+.TH "m4array-examples-join" "cware" "Sep 26, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+m4array-examples-join - an example for m4array, implementing a string join function
+.br
+.SH EXAMPLES
+.br
+#include <string.h>
+.br
+#include <stdlib.h>
+.br
+
+.br
+include(src/m4array.m4)
+.br
+
+.br
+define(`STRING_ARRAY_TYPE', `char *')
+.br
+define(`STRING_ARRAY_FREE', `') // String literals cannot be freed
+.br
+define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')
+.br
+
+.br
+struct StringArray {
+.br
+   int length;
+.br
+   int capacity;
+.br
+   char **contents;
+.br
+};
+.br
+
+.br
+char *join_string(const struct StringArray *array) {
+.br
+   char *my_string = malloc(sizeof(char) * 128);
+.br
+
+.br
+   my_string[0] = '';
+.br
+
+.br
+   M4ARRAY_FOREACH(array, `
+.br
+       // Prevent overflowing the array
+.br
+       if((strlen(my_string) + strlen($1)) >= 127)
+.br
+           break;
+.br
+
+.br
+       strcat(my_string, $1);
+.br
+   ');
+.br
+
+.br
+   return my_string;
+.br
+}
+.br
+
+.br
+int main() {
+.br
+   char *joined_string = NULL;
+.br
+   struct StringArray *my_array = M4ARRAY_INIT(my_array, STRING_ARRAY);
+.br
+
+.br
+   M4ARRAY_APPEND(my_array, "foo", STRING_ARRAY);
+.br
+   M4ARRAY_APPEND(my_array, " ", STRING_ARRAY);
+.br
+   M4ARRAY_APPEND(my_array, "bar", STRING_ARRAY);
+.br
+   M4ARRAY_APPEND(my_array, " ", STRING_ARRAY);
+.br
+   M4ARRAY_APPEND(my_array, "baz", STRING_ARRAY);
+.br
+
+.br
+   joined_string = join_string(my_array);
+.br
+
+.br
+   printf("Final string: '%s'", joined_string);
+.br
+
+.br
+   free(joined_string);
+.br
+   M4ARRAY_FREE(my_array, STRING_ARRAY);
+.br
+
+.br
+   return 0;
+.br
+}
+.br

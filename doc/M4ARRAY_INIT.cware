@@ -1,0 +1,33 @@
+.TH "M4ARRAY_INIT" "cware" "Sep 26, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+M4ARRAY_INIT - initialize a new array
+.br
+.SH SYNOPSIS
+.br
+include(m4array/m4array.m4)
+.br
+
+.br
+\fBdefine(M4ARRAY_INIT);\fR
+.br
+.SH DESCRIPTION
+.br
+This will initialize a new array on the heap.
+.br
+
+.br
+
+.br
+\fI$1\fR will be pointer to the array to initialize
+.br
+\fI$2\fR will be namespace of the array
+.br
+.SH EXAMPLES
+.br
+For examples, please see the examples section in \fBm4array\fR(cware)
+.br
+.SH SEE ALSO
+.br
+m4array(cware)

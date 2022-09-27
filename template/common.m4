@@ -1,16 +1,7 @@
 include(src/m4array.m4)
 
-struct StringArray {
-	int length;
-	int capacity;
-	char **contents;
-};
-
-struct IntArray {
-	int length;
-	int capacity;
-	int *contents;
-};
+M4ARRAY_DECLARE(IntArray, int);
+M4ARRAY_DECLARE(StringArray, char *);
 
 define(`STRING_ARRAY_TYPE', `char *')
 define(`STRING_ARRAY_FREE', `free($1)')

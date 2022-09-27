@@ -60,6 +60,8 @@ dnl @embed: M4ARRAY_CLEAR
 dnl @show_brief: 0
 dnl @embed: M4ARRAY_FILTER
 dnl @show_brief: 0
+dnl @embed: @name: M4ARRAY_DECLARE
+dnl @show_brief: 0
 dnl
 dnl
 dnl @description
@@ -95,6 +97,7 @@ dnl @\E M4ARRAY_FOREACH(cware);run an operaton for each element
 dnl @\E M4ARRAY_MAP(cware);apply an operation in place
 dnl @\E M4ARRAY_CLEAR(cware);free each element and set the length to 0
 dnl @\E M4ARRAY_FILTER(cware);filter based off a predictate
+dnl @\E M4ARRAY_DECLARE(cware);declare a new array structure
 dnl @\T
 dnl @description
 dnl
@@ -141,6 +144,38 @@ dnl ==========================
 
 define(`M4ARRAY_INITIAL_LENGTH', `3')
 define(`M4ARRAY_NEXT_SIZE', `(($1)->capacity * 2)')
+
+dnl @docgen_start
+dnl @type: macro
+dnl @name: M4ARRAY_DECLARE
+dnl @brief: declare a new array structure
+dnl
+dnl @include: m4array/m4array.m4
+dnl 
+dnl @description
+dnl @This will declare a new array structure of a certain name.
+dnl @description
+dnl
+dnl @examples
+dnl @For examples, please see the examples section in \Bm4array\B(cware)
+dnl @examples
+dnl
+dnl @param: 1
+dnl @brief: the name of the structure
+dnl
+dnl @param: 2
+dnl @brief: the type of the array
+dnl
+dnl @reference: m4array(cware)
+dnl
+dnl @docgen_end
+define(`M4ARRAY_DECLARE', `
+    struct $1 {
+        int length;
+        int capacity;
+        $2 *contents;
+    }
+')
 
 dnl @docgen_start
 dnl @type: macro

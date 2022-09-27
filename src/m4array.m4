@@ -58,6 +58,8 @@ dnl @embed: M4ARRAY_MAP
 dnl @show_brief: 0
 dnl @embed: M4ARRAY_CLEAR
 dnl @show_brief: 0
+dnl @embed: M4ARRAY_FILTER
+dnl @show_brief: 0
 dnl
 dnl
 dnl @description
@@ -92,6 +94,7 @@ dnl @\E M4ARRAY_FIND(cware);find the location of a value based off a predicate
 dnl @\E M4ARRAY_FOREACH(cware);run an operaton for each element
 dnl @\E M4ARRAY_MAP(cware);apply an operation in place
 dnl @\E M4ARRAY_CLEAR(cware);free each element and set the length to 0
+dnl @\E M4ARRAY_FILTER(cware);filter based off a predictate
 dnl @\T
 dnl @description
 dnl

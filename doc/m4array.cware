@@ -22,6 +22,8 @@ include(m4array/m4array.m4)
 .br
 \fBdefine(M4ARRAY_MAP);\fR
 .br
+\fBdefine(M4ARRAY_FILTER);\fR
+.br
 \fBdefine(M4ARRAY_CLEAR);\fR
 .br
 \fBdefine(M4ARRAY_FOREACH);\fR
@@ -85,6 +87,7 @@ M4ARRAY_FIND(cware);find the location of a value based off a predicate
 M4ARRAY_FOREACH(cware);run an operaton for each element
 M4ARRAY_MAP(cware);apply an operation in place
 M4ARRAY_CLEAR(cware);free each element and set the length to 0
+M4ARRAY_FILTER(cware);filter based off a predictate
 .TE
 .SH EXAMPLES
 .br

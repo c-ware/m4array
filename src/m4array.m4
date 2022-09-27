@@ -54,6 +54,11 @@ dnl @embed: M4ARRAY_INIT
 dnl @show_brief: 0
 dnl @embed: M4ARRAY_FOREACH
 dnl @show_brief: 0
+dnl @embed: M4ARRAY_MAP
+dnl @show_brief: 0
+dnl @embed: M4ARRAY_CLEAR
+dnl @show_brief: 0
+dnl
 dnl
 dnl @description
 dnl @An implementation of a dynamic array in \Bm4\B(1). It is type safe, and provides
@@ -85,6 +90,8 @@ dnl @\E M4ARRAY_INSERT(cware);insert a value at a specific index
 dnl @\E M4ARRAY_POP(cware);pop a value out of an index
 dnl @\E M4ARRAY_FIND(cware);find the location of a value based off a predicate
 dnl @\E M4ARRAY_FOREACH(cware);run an operaton for each element
+dnl @\E M4ARRAY_MAP(cware);apply an operation in place
+dnl @\E M4ARRAY_CLEAR(cware);free each element and set the length to 0
 dnl @\T
 dnl @description
 dnl

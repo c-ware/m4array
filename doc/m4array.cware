@@ -20,6 +20,10 @@ include(m4array/m4array.m4)
 .br
 \fBdefine(M4ARRAY_FIND);\fR
 .br
+\fBdefine(M4ARRAY_MAP);\fR
+.br
+\fBdefine(M4ARRAY_CLEAR);\fR
+.br
 \fBdefine(M4ARRAY_FOREACH);\fR
 .br
 \fBdefine(M4ARRAY_FREE);\fR
@@ -79,6 +83,8 @@ M4ARRAY_INSERT(cware);insert a value at a specific index
 M4ARRAY_POP(cware);pop a value out of an index
 M4ARRAY_FIND(cware);find the location of a value based off a predicate
 M4ARRAY_FOREACH(cware);run an operaton for each element
+M4ARRAY_MAP(cware);apply an operation in place
+M4ARRAY_CLEAR(cware);free each element and set the length to 0
 .TE
 .SH EXAMPLES
 .br

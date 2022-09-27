@@ -395,6 +395,44 @@ define(`M4ARRAY_MAP', `
 
 dnl @docgen_start
 dnl @type: macro
+dnl @name: M4ARRAY_CLEAR
+dnl @brief: release the contents of an array, without freeing the array
+dnl
+dnl @include: m4array/m4array.m4
+dnl
+dnl @description
+dnl @This macro will "clear" the array by freeing each element of the array,
+dnl @and setting the length of the array to zero.
+dnl @description
+dnl
+dnl @examples
+dnl @For examples, please see the examples section in \Bm4array\B(cware)
+dnl @examples
+dnl
+dnl @param: 1
+dnl @brief: pointer to the array to clear
+dnl
+dnl @param: 2
+dnl @brief: the namespace of the array
+dnl
+dnl @reference: m4array(cware)
+dnl
+dnl @docgen_end
+define(`M4ARRAY_CLEAR', `
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < ($1)->length) {
+			$2_FREE(($1)->contents[__M4_INDEX]);
+            __M4_INDEX++;
+		}
+
+        ($1)->length = 0;
+	} while(0)
+')
+
+dnl @docgen_start
+dnl @type: macro
 dnl @name: M4ARRAY_FOREACH
 dnl @brief: run code for each element in an array
 dnl

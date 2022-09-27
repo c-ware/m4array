@@ -32,3 +32,7 @@ echo Ran test tests/foreach
 echo Running test tests/map
 tests/map
 echo Ran test tests/map
+
+echo Running test tests/clear
+tests/clear
+echo Ran test tests/clear

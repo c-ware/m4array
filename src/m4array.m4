@@ -112,7 +112,7 @@ dnl @docgen_end
 #include <assert.h>
 #include <string.h>
 
-dnl =============================
+dnl ==============================
 dnl # M4array portability macros #
 dnl ==============================
 
@@ -397,6 +397,59 @@ define(`M4ARRAY_MAP', `
 			($1)->contents[__M4_INDEX] = (M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]));
             __M4_INDEX++;
 		}
+	} while(0)
+')
+
+dnl @docgen_start
+dnl @type: macro
+dnl @name: M4ARRAY_FILTER
+dnl @brief: filter all elements which do not match a predicate
+dnl
+dnl @include: m4array/m4array.m4
+dnl
+dnl @description
+dnl @This macro will evaluate a macro for each element in the array, and
+dnl @if that element does not match the predicate, it will be removed from
+dnl @the array. Each value that does not pass the filter will be released
+dnl @from memory.
+dnl @description
+dnl
+dnl @examples
+dnl @For examples, please see the examples section in \Bm4array\B(cware)
+dnl @examples
+dnl
+dnl @param: 1
+dnl @brief: pointer to the array to filter to
+dnl
+dnl @param: 2
+dnl @brief: the macro body to execute
+dnl
+dnl @param: 3
+dnl @brief: the namespace of the array
+dnl
+dnl @reference: m4array(cware)
+dnl
+dnl @docgen_end
+define(`M4ARRAY_FILTER', `
+	define(`M4ARRAY_LAMBDA', `$2')
+
+	do {
+		int __M4_INDEX = 0;
+        int __M4_CURSOR = 0;
+
+		while(__M4_INDEX < ($1)->length) {
+            /* If it evaluates to 0, it does not match the predicate */
+            if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 1) {
+                ($1)->contents[__M4_CURSOR] = ($1)->contents[__M4_INDEX];
+                __M4_CURSOR++; 
+            } else {
+                $3_FREE(($1)->contents[__M4_INDEX]);
+            }
+
+            __M4_INDEX++;
+		}
+
+        ($1)->length = __M4_CURSOR;
 	} while(0)
 ')
 

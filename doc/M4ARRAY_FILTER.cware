@@ -1,0 +1,41 @@
+.TH "M4ARRAY_FILTER" "cware" "Sep 27, 2022" "" "C-Ware Manuals"
+.br
+.SH NAME
+.br
+M4ARRAY_FILTER - filter all elements which do not match a predicate
+.br
+.SH SYNOPSIS
+.br
+include(m4array/m4array.m4)
+.br
+
+.br
+\fBdefine(M4ARRAY_FILTER);\fR
+.br
+.SH DESCRIPTION
+.br
+This macro will evaluate a macro for each element in the array, and
+.br
+if that element does not match the predicate, it will be removed from
+.br
+the array. Each value that does not pass the filter will be released
+.br
+from memory.
+.br
+
+.br
+
+.br
+\fI$1\fR will be pointer to the array to filter to
+.br
+\fI$2\fR will be the macro body to execute
+.br
+\fI$3\fR will be the namespace of the array
+.br
+.SH EXAMPLES
+.br
+For examples, please see the examples section in \fBm4array\fR(cware)
+.br
+.SH SEE ALSO
+.br
+m4array(cware)

@@ -43,8 +43,8 @@ M4=m4
 
 CC=cc
 CFLAGS=-Wall -Wextra -Wpedantic
-SRCS=tests/clear.c tests/pop.c tests/insert.c tests/map.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c  examples/join.c 
-TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append 
+SRCS=tests/clear.c tests/pop.c tests/insert.c tests/map.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c tests/filter.c  examples/join.c 
+TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append tests/filter 
 EXAMPLES=examples/join 
 
 all: $(SRCS) $(TESTS) $(EXAMPLES)
@@ -78,6 +78,8 @@ tests/find.c: tests/find.m4
 	$(M4) tests/find.m4 > tests/find.c
 tests/append.c: tests/append.m4 
 	$(M4) tests/append.m4 > tests/append.c
+tests/filter.c: tests/filter.m4 
+	$(M4) tests/filter.m4 > tests/filter.c
 
 tests/clear: tests/clear.c 
 	$(CC) tests/clear.c $(CFLAGS) -o tests/clear
@@ -97,6 +99,8 @@ tests/find: tests/find.c
 	$(CC) tests/find.c $(CFLAGS) -o tests/find
 tests/append: tests/append.c 
 	$(CC) tests/append.c $(CFLAGS) -o tests/append
+tests/filter: tests/filter.c 
+	$(CC) tests/filter.c $(CFLAGS) -o tests/filter
 
 
 examples/join.c: examples/join.m4 

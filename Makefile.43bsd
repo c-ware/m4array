@@ -44,7 +44,7 @@ M4=m4
 
 CC=cc
 CFLAGS=-D__QuasiBSD__
-TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append 
+TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append tests/filter 
 
 all: $(TESTS)
 
@@ -57,6 +57,8 @@ tests/foreach: tests/foreach.c
 	$(CC) tests/foreach.c $(CFLAGS) -o tests/foreach
 tests/append: tests/append.c 
 	$(CC) tests/append.c $(CFLAGS) -o tests/append
+tests/filter: tests/filter.c 
+	$(CC) tests/filter.c $(CFLAGS) -o tests/filter
 tests/init: tests/init.c 
 	$(CC) tests/init.c $(CFLAGS) -o tests/init
 tests/clear: tests/clear.c 

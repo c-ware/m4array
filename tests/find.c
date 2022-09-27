@@ -6,7 +6,6 @@
 
 
 
-
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -47,11 +46,23 @@
 
 
 
+
+
 struct StringArray {
 	int length;
 	int capacity;
 	char **contents;
 };
+
+struct IntArray {
+	int length;
+	int capacity;
+	int *contents;
+};
+
+
+
+
 
 
 
@@ -252,6 +263,124 @@ int main() {
 	} while(0)
 ;
     ASSERT_NUMEQ(index, 0);
+
+    /* Make sure the find operation does not go past the length. */
+    my_array->length = 0;
+
+    index = 
+	-1;
+
+	(index) = -1;
+
+	
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (my_array)->length) {
+			if((strcmp((my_array)->contents[__M4_INDEX], "qaz") == 0) == 0) {
+				__M4_INDEX++;
+				continue;
+			}
+
+			(index) = __M4_INDEX;
+			break;
+		}
+	} while(0)
+;
+    ASSERT_NUMEQ(index, -1);
+
+    index = 
+	-1;
+
+	(index) = -1;
+
+	
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (my_array)->length) {
+			if((strcmp((my_array)->contents[__M4_INDEX], "quz") == 0) == 0) {
+				__M4_INDEX++;
+				continue;
+			}
+
+			(index) = __M4_INDEX;
+			break;
+		}
+	} while(0)
+;
+    ASSERT_NUMEQ(index, -1);
+
+    index = 
+	-1;
+
+	(index) = -1;
+
+	
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (my_array)->length) {
+			if((strcmp((my_array)->contents[__M4_INDEX], "baz") == 0) == 0) {
+				__M4_INDEX++;
+				continue;
+			}
+
+			(index) = __M4_INDEX;
+			break;
+		}
+	} while(0)
+;
+    ASSERT_NUMEQ(index, -1);
+
+    index = 
+	-1;
+
+	(index) = -1;
+
+	
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (my_array)->length) {
+			if((strcmp((my_array)->contents[__M4_INDEX], "bar") == 0) == 0) {
+				__M4_INDEX++;
+				continue;
+			}
+
+			(index) = __M4_INDEX;
+			break;
+		}
+	} while(0)
+;
+    ASSERT_NUMEQ(index, -1);
+
+    index = 
+	-1;
+
+	(index) = -1;
+
+	
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (my_array)->length) {
+			if((strcmp((my_array)->contents[__M4_INDEX], "foo") == 0) == 0) {
+				__M4_INDEX++;
+				continue;
+			}
+
+			(index) = __M4_INDEX;
+			break;
+		}
+	} while(0)
+;
+    ASSERT_NUMEQ(index, -1);
 
 	
 	do {

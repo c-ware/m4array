@@ -46,11 +46,23 @@
 
 
 
+
+
 struct StringArray {
 	int length;
 	int capacity;
 	char **contents;
 };
+
+struct IntArray {
+	int length;
+	int capacity;
+	int *contents;
+};
+
+
+
+
 
 
 

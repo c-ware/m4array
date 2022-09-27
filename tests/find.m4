@@ -64,6 +64,24 @@ int main() {
     index = M4ARRAY_FIND(my_array, index, `strcmp($1, "foo") == 0');
     ASSERT_NUMEQ(index, 0);
 
+    /* Make sure the find operation does not go past the length. */
+    my_array->length = 0;
+
+    index = M4ARRAY_FIND(my_array, index, `strcmp($1, "qaz") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    index = M4ARRAY_FIND(my_array, index, `strcmp($1, "quz") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    index = M4ARRAY_FIND(my_array, index, `strcmp($1, "baz") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    index = M4ARRAY_FIND(my_array, index, `strcmp($1, "bar") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    index = M4ARRAY_FIND(my_array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, -1);
+
 	M4ARRAY_FREE(my_array, STRING_ARRAY);
 
 	return 0;

@@ -28,3 +28,7 @@ echo Ran test tests/find
 echo Running test tests/foreach
 tests/foreach
 echo Ran test tests/foreach
+
+echo Running test tests/map
+tests/map
+echo Ran test tests/map

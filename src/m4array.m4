@@ -356,6 +356,45 @@ define(`M4ARRAY_FIND', `
 
 dnl @docgen_start
 dnl @type: macro
+dnl @name: M4ARRAY_MAP
+dnl @brief: apply an operation to each element of an array
+dnl
+dnl @include: m4array/m4array.m4
+dnl
+dnl @description
+dnl @This macro will apply an operation on each member of an array. The macro
+dnl @is in-place, and will a[i] with the output of f(x), where a[i] is any
+dnl @given array element, and f(x) is a macro which uses a[i].
+dnl @description
+dnl
+dnl @examples
+dnl @For examples, please see the examples section in \Bm4array\B(cware)
+dnl @examples
+dnl
+dnl @param: 1
+dnl @brief: pointer to the array to map to
+dnl
+dnl @param: 2
+dnl @brief: the macro body to execute
+dnl
+dnl @reference: m4array(cware)
+dnl
+dnl @docgen_end
+define(`M4ARRAY_MAP', `
+	define(`M4ARRAY_LAMBDA', `$2')
+
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < ($1)->length) {
+			($1)->contents[__M4_INDEX] = (M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]));
+            __M4_INDEX++;
+		}
+	} while(0)
+')
+
+dnl @docgen_start
+dnl @type: macro
 dnl @name: M4ARRAY_FOREACH
 dnl @brief: run code for each element in an array
 dnl

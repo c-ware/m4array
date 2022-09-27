@@ -46,7 +46,7 @@ CC=cc
 CPP=/lib/cpp
 CFLAGS=
 CPPFLAGS=-I/usr/include
-TESTS=tests/pop tests/insert tests/init tests/foreach tests/free tests/find tests/append 
+TESTS=tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append 
 
 all: $(TESTS)
 
@@ -64,6 +64,9 @@ tests/append: tests/append.c
 tests/init: tests/init.c 
 	$(CPP) $(CPPFLAGS) tests/init.c > tests/init.c.i
 	$(CC) tests/init.c.i $(CFLAGS) -o tests/init
+tests/map: tests/map.c 
+	$(CPP) $(CPPFLAGS) tests/map.c > tests/map.c.i
+	$(CC) tests/map.c.i $(CFLAGS) -o tests/map
 tests/find: tests/find.c 
 	$(CPP) $(CPPFLAGS) tests/find.c > tests/find.c.i
 	$(CC) tests/find.c.i $(CFLAGS) -o tests/find

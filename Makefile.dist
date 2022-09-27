@@ -43,8 +43,8 @@ M4=m4
 
 CC=cc
 CFLAGS=-Wall -Wextra -Wpedantic
-SRCS=tests/pop.c tests/insert.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c  examples/join.c 
-TESTS=tests/pop tests/insert tests/init tests/foreach tests/free tests/find tests/append 
+SRCS=tests/pop.c tests/insert.c tests/map.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c  examples/join.c 
+TESTS=tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append 
 EXAMPLES=examples/join 
 
 all: $(SRCS) $(TESTS) $(EXAMPLES)
@@ -64,6 +64,8 @@ tests/pop.c: tests/pop.m4
 	$(M4) tests/pop.m4 > tests/pop.c
 tests/insert.c: tests/insert.m4 
 	$(M4) tests/insert.m4 > tests/insert.c
+tests/map.c: tests/map.m4 
+	$(M4) tests/map.m4 > tests/map.c
 tests/init.c: tests/init.m4 
 	$(M4) tests/init.m4 > tests/init.c
 tests/foreach.c: tests/foreach.m4 
@@ -79,6 +81,8 @@ tests/pop: tests/pop.c
 	$(CC) tests/pop.c $(CFLAGS) -o tests/pop
 tests/insert: tests/insert.c 
 	$(CC) tests/insert.c $(CFLAGS) -o tests/insert
+tests/map: tests/map.c 
+	$(CC) tests/map.c $(CFLAGS) -o tests/map
 tests/init: tests/init.c 
 	$(CC) tests/init.c $(CFLAGS) -o tests/init
 tests/foreach: tests/foreach.c 

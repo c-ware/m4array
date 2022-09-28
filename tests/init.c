@@ -56,18 +56,29 @@
 
 
     struct IntArray {
+        int used;
         int length;
         int capacity;
+
         int *contents;
     }
 ;
 
     struct StringArray {
+        int used;
         int length;
         int capacity;
+
         char * *contents;
     }
 ;
+
+
+
+
+
+/* This array is used for testing memory reuse (hence
+   the "RE" */
 
 
 
@@ -83,11 +94,13 @@ int main() {
 
 	my_array = 
 	(struct StringArray *) malloc(sizeof(*(my_array)));
+	(my_array)->used = 0;
 	(my_array)->length = 0;
 	(my_array)->capacity = 3;
 	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
 ;	
 
+    ASSERT_NUMEQ(my_array->used, 0);
     ASSERT_NUMEQ(my_array->length, 0);
     ASSERT_NUMEQ(my_array->capacity, 3);
     ASSERT_PTRNEQ(my_array->contents, CWUTILS_NULL);

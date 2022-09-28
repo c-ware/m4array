@@ -56,18 +56,29 @@
 
 
     struct IntArray {
+        int used;
         int length;
         int capacity;
+
         int *contents;
     }
 ;
 
     struct StringArray {
+        int used;
         int length;
         int capacity;
+
         char * *contents;
     }
 ;
+
+
+
+
+
+/* This array is used for testing memory reuse (hence
+   the "RE" */
 
 
 
@@ -81,6 +92,7 @@
 int main() {
 	struct IntArray *array = 
 	(struct IntArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
 	(array)->length = 0;
 	(array)->capacity = 3;
 	(array)->contents = (int *) malloc(sizeof(int) * 3)
@@ -92,8 +104,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (1);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (1);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -101,8 +121,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (2);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (2);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -110,8 +138,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (3);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (3);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -119,8 +155,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (4);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (4);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
 
     /* Filter all elements that are not divisible by two */
@@ -157,8 +201,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (5);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (5);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -166,8 +218,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (6);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (6);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -175,8 +235,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (7);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (7);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
     
 	if((array)->length == (array)->capacity) {
@@ -184,8 +252,16 @@ int main() {
 		(array)->capacity = ((array)->capacity * 2);
 	}
 
-	(array)->contents[(array)->length] = (8);
-	(array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (8);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
 
     /* Filter all elements that are not divisible by two */

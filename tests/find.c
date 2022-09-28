@@ -56,18 +56,29 @@
 
 
     struct IntArray {
+        int used;
         int length;
         int capacity;
+
         int *contents;
     }
 ;
 
     struct StringArray {
+        int used;
         int length;
         int capacity;
+
         char * *contents;
     }
 ;
+
+
+
+
+
+/* This array is used for testing memory reuse (hence
+   the "RE" */
 
 
 
@@ -116,6 +127,7 @@ int main() {
 
 	my_array = 
 	(struct StringArray *) malloc(sizeof(*(my_array)));
+	(my_array)->used = 0;
 	(my_array)->length = 0;
 	(my_array)->capacity = 3;
 	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
@@ -127,8 +139,16 @@ int main() {
 		(my_array)->capacity = ((my_array)->capacity * 2);
 	}
 
-	(my_array)->contents[(my_array)->length] = (string_1);
-	(my_array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((my_array)->used < (my_array)->length) {
+        
+    } else {
+	    (my_array)->contents[(my_array)->length] = (string_1);
+	    (my_array)->length++;
+    }
+
+    (my_array)->used++;
 ;
 	
 	if((my_array)->length == (my_array)->capacity) {
@@ -136,8 +156,16 @@ int main() {
 		(my_array)->capacity = ((my_array)->capacity * 2);
 	}
 
-	(my_array)->contents[(my_array)->length] = (string_2);
-	(my_array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((my_array)->used < (my_array)->length) {
+        
+    } else {
+	    (my_array)->contents[(my_array)->length] = (string_2);
+	    (my_array)->length++;
+    }
+
+    (my_array)->used++;
 ;
 	
 	if((my_array)->length == (my_array)->capacity) {
@@ -145,8 +173,16 @@ int main() {
 		(my_array)->capacity = ((my_array)->capacity * 2);
 	}
 
-	(my_array)->contents[(my_array)->length] = (string_3);
-	(my_array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((my_array)->used < (my_array)->length) {
+        
+    } else {
+	    (my_array)->contents[(my_array)->length] = (string_3);
+	    (my_array)->length++;
+    }
+
+    (my_array)->used++;
 ;
 	
 	if((my_array)->length == (my_array)->capacity) {
@@ -154,8 +190,16 @@ int main() {
 		(my_array)->capacity = ((my_array)->capacity * 2);
 	}
 
-	(my_array)->contents[(my_array)->length] = (string_4);
-	(my_array)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. */
+    if((my_array)->used < (my_array)->length) {
+        
+    } else {
+	    (my_array)->contents[(my_array)->length] = (string_4);
+	    (my_array)->length++;
+    }
+
+    (my_array)->used++;
 ;
 
     index = 

@@ -13,11 +13,7 @@ dnl @define(`STRING_ARRAY_TYPE', `char *')
 dnl @define(`STRING_ARRAY_FREE', `') // String literals cannot be freed
 dnl @define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')
 dnl @
-dnl @struct StringArray {
-dnl @   int length;
-dnl @   int capacity;
-dnl @   char **contents;
-dnl @};
+dnl @M4ARRAY_DECLARE(StringArray, char *);
 dnl @
 dnl @char *join_string(const struct StringArray *array) {
 dnl @   char *my_string = malloc(sizeof(char) * 128);
@@ -71,11 +67,7 @@ define(`STRING_ARRAY_TYPE', `char *')
 define(`STRING_ARRAY_FREE', `') // String literals cannot be freed
 define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')
 
-struct StringArray {
-   int length;
-   int capacity;
-   char **contents;
-};
+M4ARRAY_DECLARE(StringArray, char *);
 
 char *join_string(const struct StringArray *array) {
    char *my_string = malloc(sizeof(char) * 128);

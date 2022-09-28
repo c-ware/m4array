@@ -171,8 +171,10 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_DECLARE', `
     struct $1 {
+        int used;
         int length;
         int capacity;
+
         $2 *contents;
     }
 ')
@@ -203,6 +205,7 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_INIT', `
 	($2_ARRAY_TYPE *) malloc(sizeof(*($1)));
+	($1)->used = 0;
 	($1)->length = 0;
 	($1)->capacity = M4ARRAY_INITIAL_LENGTH;
 	($1)->contents = ($2_TYPE *) malloc(sizeof($2_TYPE) * M4ARRAY_INITIAL_LENGTH)
@@ -242,8 +245,17 @@ define(`M4ARRAY_APPEND', `
 		($1)->capacity = M4ARRAY_NEXT_SIZE($1);
 	}
 
-	($1)->contents[($1)->length] = ($2);
-	($1)->length++
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if(($1)->used < ($1)->length) {
+        ifdef(`$3_REUSE', `$3_REUSE($2, ($1)->contents[($1)->used]);')
+    } else {
+	    ($1)->contents[($1)->length] = ($2);
+	    ($1)->length++;
+    }
+
+    ($1)->used++;
 ')
 
 dnl @docgen_start

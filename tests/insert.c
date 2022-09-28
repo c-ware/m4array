@@ -134,7 +134,8 @@ int main() {
 	}
 
     /* If used < length, that means we have data in the array that
-       is currently unused, but initialized. We can reuse it. */
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
     if((my_array)->used < (my_array)->length) {
         
     } else {

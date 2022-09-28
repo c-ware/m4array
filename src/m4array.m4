@@ -530,14 +530,26 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_CLEAR', `
 	do {
-		int __M4_INDEX = 0;
+        /* We only need to release the contents of the array if
+           we do not want to reuse memory. If we do want to reuse
+           memory, all we need to do is set the used length to zero
+           to signal to adding functions that there is allocated,
+           but unused slots in the array. */
+        ifdef(`$2_REUSE', `', `
+		    int __M4_INDEX = 0;
 
-		while(__M4_INDEX < ($1)->length) {
-			$2_FREE(($1)->contents[__M4_INDEX]);
-            __M4_INDEX++;
-		}
+		    while(__M4_INDEX < ($1)->length) {
+		    	$2_FREE(($1)->contents[__M4_INDEX]);
+                __M4_INDEX++;
+		    }
+            
+            ($1)->length = 0;
+        ')
 
-        ($1)->length = 0;
+        /* Regardless of whether or not we reuse memory, this
+           can be reset to zero. */
+        ($1)->used = 0;
+
 	} while(0)
 ')
 

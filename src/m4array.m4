@@ -299,7 +299,8 @@ define(`M4ARRAY_INSERT', `
 	do {
 		int __M4_INDEX = ($1)->length - 1;
 
-		/* Shift each element before ($3 - 1) over by 1 */
+		/* Shift each element before ($3 - 1) over by 1. This includes
+           allocated, but unused slots in the array. */
 		while(__M4_INDEX != ($3) - 1) {
 			($1)->contents[__M4_INDEX + 1] = ($1)->contents[__M4_INDEX];
 			__M4_INDEX--;
@@ -307,6 +308,7 @@ define(`M4ARRAY_INSERT', `
 
 		($1)->contents[$3] = $2;
 		($1)->length++;
+		($1)->used++;
 	} while(0)
 ')
 
@@ -349,12 +351,15 @@ define(`M4ARRAY_POP', `
 	do {
 		int __M4_INDEX = $2;
 
-		/* Pull everything from index ($2), onwards, back by 1. */
+		/* Pull everything from index ($2), onwards, back by 1. This
+           must also pull back any allocated, but unused sections of
+           the array, too. */
 		while(__M4_INDEX < ($1)->length) {
 			($1)->contents[__M4_INDEX] = ($1)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
 
+		($1)->used--;
 		($1)->length--;
 	} while(0)
 ')
@@ -399,7 +404,7 @@ define(`M4ARRAY_FIND', `
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < ($1)->length) {
+		while(__M4_INDEX < ($1)->used) {
 			if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 0) {
 				__M4_INDEX++;
 				continue;
@@ -443,7 +448,7 @@ define(`M4ARRAY_MAP', `
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < ($1)->length) {
+		while(__M4_INDEX < ($1)->used) {
 			($1)->contents[__M4_INDEX] = (M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]));
             __M4_INDEX++;
 		}
@@ -487,7 +492,7 @@ define(`M4ARRAY_FILTER', `
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
-		while(__M4_INDEX < ($1)->length) {
+		while(__M4_INDEX < ($1)->used) {
             /* If it evaluates to 0, it does not match the predicate */
             if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 1) {
                 ($1)->contents[__M4_CURSOR] = ($1)->contents[__M4_INDEX];
@@ -499,7 +504,7 @@ define(`M4ARRAY_FILTER', `
             __M4_INDEX++;
 		}
 
-        ($1)->length = __M4_CURSOR;
+        ($1)->used = __M4_CURSOR;
 	} while(0)
 ')
 
@@ -538,7 +543,7 @@ define(`M4ARRAY_CLEAR', `
         ifdef(`$2_REUSE', `', `
 		    int __M4_INDEX = 0;
 
-		    while(__M4_INDEX < ($1)->length) {
+		    while(__M4_INDEX < ($1)->used) {
 		    	$2_FREE(($1)->contents[__M4_INDEX]);
                 __M4_INDEX++;
 		    }
@@ -585,7 +590,7 @@ define(`M4ARRAY_FOREACH', `
     do {
         int __M4_INDEX = 0;
 
-        while(__M4_INDEX < ($1)->length) {
+        while(__M4_INDEX < ($1)->used) {
             M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]);
 
             __M4_INDEX++;

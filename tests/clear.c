@@ -235,7 +235,7 @@ int main() {
         
 		    int __M4_INDEX = 0;
 
-		    while(__M4_INDEX < (array)->length) {
+		    while(__M4_INDEX < (array)->used) {
 		    	;
                 __M4_INDEX++;
 		    }

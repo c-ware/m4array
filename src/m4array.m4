@@ -297,18 +297,30 @@ define(`M4ARRAY_INSERT', `
 	}
 
 	do {
-		int __M4_INDEX = ($1)->length - 1;
+		int __M4_INDEX = ($1)->used - 1;
+        $4_TYPE __M4_TEMP = ($1)->contents[($1)->used];
 
-		/* Shift each element before ($3 - 1) over by 1. This includes
-           allocated, but unused slots in the array. */
+		/* Shift each element before ($3 - 1) over by 1. This WILL overwrite
+           the first allocated, but unused slot in the array, but this is not
+           an issue because in the case where we do care about memory reuse,
+           we save the first reusable slot anyway. */
 		while(__M4_INDEX != ($3) - 1) {
 			($1)->contents[__M4_INDEX + 1] = ($1)->contents[__M4_INDEX];
 			__M4_INDEX--;
 		}
 
-		($1)->contents[$3] = $2;
-		($1)->length++;
-		($1)->used++;
+        if(($1)->used < ($1)->length) {
+            ifdef(`$4_REUSE', `$4_REUSE($2, __M4_TEMP);')
+
+            /* We do not increase the length of the array because we do
+               not actually increase the length of initialized data. */
+		    ($1)->contents[$3] = __M4_TEMP;
+		    ($1)->used++;
+        } else {
+		    ($1)->contents[$3] = $2;
+		    ($1)->length++;
+		    ($1)->used++;
+        }
 	} while(0)
 ')
 
@@ -485,6 +497,26 @@ dnl
 dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
+dnl
+dnl The filter operation follows this general algorithom to allow for
+dnl memory reuse.
+dnl
+dnl Let A be the array
+dnl Let L be the number of elements that passed the predicate
+dnl Let I be the index of an element in the array
+dnl Let len(A) be the length of the array
+dnl
+dnl For each element A[I], if A[I] matches the predicate, store A[L]
+dnl in a temporary variable X, and assign A[L] to A[I]. Finally, assign
+dnl X to A[I]. For each element A[I] that matches the predicate, increment
+dnl L.
+dnl
+dnl Once this has been completed, we now have a "sorted" array of elements
+dnl that passed the filter, and elements that did not. If we are planning to
+dnl reuse memory, we can keep it like this. However, if we are not, we should
+dnl release each element that did not pass the filter from memory. Each element
+dnl that passed the filter will be in the range [0, L), and each element that
+dnl did not pass the filter will be from range [L, len(A))
 define(`M4ARRAY_FILTER', `
 	define(`M4ARRAY_LAMBDA', `$2')
 
@@ -493,18 +525,38 @@ define(`M4ARRAY_FILTER', `
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < ($1)->used) {
-            /* If it evaluates to 0, it does not match the predicate */
+            /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 1) {
+                $3_TYPE __M4_TEMP = ($1)->contents[__M4_CURSOR];
+
                 ($1)->contents[__M4_CURSOR] = ($1)->contents[__M4_INDEX];
-                __M4_CURSOR++; 
-            } else {
-                $3_FREE(($1)->contents[__M4_INDEX]);
+                ($1)->contents[__M4_INDEX] = __M4_TEMP;
+                __M4_CURSOR++;
             }
 
             __M4_INDEX++;
 		}
 
-        ($1)->used = __M4_CURSOR;
+        /* If we are reusing memory, then we should leave the length alone.
+           Otherwise, length should stay the same as the used count. Normally,
+           at first thought, we should do x = (y + 1), but we do not have to,
+           since y will be equal to the length of the array. */
+        ifdef(`$3_REUSE', `($1)->used = __M4_CURSOR;')
+
+        /* If we do not enforce memory reuse, everything after __M4_CURSOR
+           must be freed, since it will not be reusable. Once this is done,
+           we can set the length __M4_CURSOR */
+        ifdef(`$3_REUSE', `', `
+            __M4_INDEX = __M4_CURSOR;
+
+            while(__M4_INDEX < ($1)->length) {
+                $3_FREE(($1)->contents[__M4_INDEX]);
+                __M4_INDEX++;
+            }
+
+            ($1)->length = __M4_CURSOR;
+            ($1)->used = __M4_CURSOR;
+        ') 
 	} while(0)
 ')
 

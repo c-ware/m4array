@@ -28,7 +28,7 @@ int main() {
      * the length.
     */
 
-    array->length = 0;
+    array->used = 0;
     M4ARRAY_MAP(array, `$1 * $1');
     ASSERT_NUMEQ(array->contents[0], 1);
     ASSERT_NUMEQ(array->contents[1], 4);

@@ -81,7 +81,7 @@ char *join_string(const struct StringArray *array) {
     do {
         int __M4_INDEX = 0;
 
-        while(__M4_INDEX < (array)->length) {
+        while(__M4_INDEX < (array)->used) {
             
        // Prevent overflowing the array
        if((strlen(my_string) + strlen((array)->contents[__M4_INDEX])) >= 127)

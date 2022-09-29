@@ -164,7 +164,7 @@ int main() {
     do {
         int __M4_INDEX = 0;
 
-        while(__M4_INDEX < (my_array)->length) {
+        while(__M4_INDEX < (my_array)->used) {
             strcat(full_buffer, (my_array)->contents[__M4_INDEX]);
 
             __M4_INDEX++;

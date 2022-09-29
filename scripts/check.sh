@@ -36,3 +36,7 @@ echo Ran test tests/map
 echo Running test tests/clear
 tests/clear
 echo Ran test tests/clear
+
+echo Running test tests/filter
+tests/filter
+echo Ran test tests/filter

@@ -178,7 +178,7 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (array)->length) {
+		while(__M4_INDEX < (array)->used) {
 			(array)->contents[__M4_INDEX] = ((array)->contents[__M4_INDEX] * (array)->contents[__M4_INDEX]);
             __M4_INDEX++;
 		}
@@ -196,14 +196,14 @@ int main() {
      * the length.
     */
 
-    array->length = 0;
+    array->used = 0;
     
 	
 
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (array)->length) {
+		while(__M4_INDEX < (array)->used) {
 			(array)->contents[__M4_INDEX] = ((array)->contents[__M4_INDEX] * (array)->contents[__M4_INDEX]);
             __M4_INDEX++;
 		}

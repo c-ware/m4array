@@ -117,7 +117,6 @@ int main() {
 	string_4[2] = 'z';
 	string_4[3] = '\0';
 
-
 	my_array = 
 	(struct StringArray *) malloc(sizeof(*(my_array)));
 	(my_array)->used = 0;

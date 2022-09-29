@@ -218,12 +218,15 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		/* Pull everything from index (0), onwards, back by 1. */
+		/* Pull everything from index (0), onwards, back by 1. This
+           must also pull back any allocated, but unused sections of
+           the array, too. */
 		while(__M4_INDEX < (my_array)->length) {
 			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
 
+		(my_array)->used--;
 		(my_array)->length--;
 	} while(0)
 ;
@@ -243,12 +246,15 @@ int main() {
 	do {
 		int __M4_INDEX = 1;
 
-		/* Pull everything from index (1), onwards, back by 1. */
+		/* Pull everything from index (1), onwards, back by 1. This
+           must also pull back any allocated, but unused sections of
+           the array, too. */
 		while(__M4_INDEX < (my_array)->length) {
 			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
 
+		(my_array)->used--;
 		(my_array)->length--;
 	} while(0)
 ;
@@ -267,12 +273,15 @@ int main() {
 	do {
 		int __M4_INDEX = 1;
 
-		/* Pull everything from index (1), onwards, back by 1. */
+		/* Pull everything from index (1), onwards, back by 1. This
+           must also pull back any allocated, but unused sections of
+           the array, too. */
 		while(__M4_INDEX < (my_array)->length) {
 			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
 
+		(my_array)->used--;
 		(my_array)->length--;
 	} while(0)
 ;
@@ -290,12 +299,15 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		/* Pull everything from index (0), onwards, back by 1. */
+		/* Pull everything from index (0), onwards, back by 1. This
+           must also pull back any allocated, but unused sections of
+           the array, too. */
 		while(__M4_INDEX < (my_array)->length) {
 			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
 
+		(my_array)->used--;
 		(my_array)->length--;
 	} while(0)
 ;

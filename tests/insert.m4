@@ -44,6 +44,7 @@ int main() {
     ASSERT_STREQ(my_array->contents[0], string_2);
     ASSERT_STREQ(my_array->contents[1], string_1);
     ASSERT_NUMEQ(my_array->length, 2);
+    ASSERT_NUMEQ(my_array->used, 2);
     ASSERT_NUMEQ(my_array->capacity, M4ARRAY_INITIAL_LENGTH);
     ASSERT_PTRNEQ(my_array->contents, CWUTILS_NULL);
 
@@ -52,6 +53,7 @@ int main() {
     ASSERT_STREQ(my_array->contents[1], string_2);
     ASSERT_STREQ(my_array->contents[2], string_1);
     ASSERT_NUMEQ(my_array->length, 3);
+    ASSERT_NUMEQ(my_array->used, 3);
     ASSERT_NUMEQ(my_array->capacity, M4ARRAY_INITIAL_LENGTH);
     ASSERT_PTRNEQ(my_array->contents, CWUTILS_NULL);
 
@@ -61,8 +63,41 @@ int main() {
     ASSERT_STREQ(my_array->contents[2], string_2);
     ASSERT_STREQ(my_array->contents[3], string_1);
     ASSERT_NUMEQ(my_array->length, 4);
+    ASSERT_NUMEQ(my_array->used, 4);
     ASSERT_NUMEQ(my_array->capacity, M4ARRAY_INITIAL_LENGTH * 2);
     ASSERT_PTRNEQ(my_array->contents, CWUTILS_NULL);
+
+    /* OK, so we have verified that basic insertion behavior works. However,
+       does insert respect memory reuse..? */
+
+    my_array->used = 0;
+
+    /* Cannot insert into an empty array */
+    M4ARRAY_APPEND(my_array, "aaa", STRING_ARRAY_RE);
+    ASSERT_STREQ(my_array->contents[0], "aaa");
+    ASSERT_STREQ(my_array->contents[1], string_4);
+    ASSERT_STREQ(my_array->contents[2], string_2);
+    ASSERT_STREQ(my_array->contents[3], string_1);
+    ASSERT_NUMEQ(my_array->used, 1);
+    ASSERT_NUMEQ(my_array->length, 4);
+
+    M4ARRAY_INSERT(my_array, "bbb", 0, STRING_ARRAY_RE);
+    ASSERT_STREQ(my_array->contents[0], "bbb");
+    ASSERT_STREQ(my_array->contents[1], "aaa");
+    ASSERT_STREQ(my_array->contents[2], string_2);
+    ASSERT_STREQ(my_array->contents[3], string_1);
+    ASSERT_NUMEQ(my_array->used, 2);
+    ASSERT_NUMEQ(my_array->length, 4);
+    
+    M4ARRAY_INSERT(my_array, "ccc", 1, STRING_ARRAY_RE);
+    ASSERT_STREQ(my_array->contents[0], "bbb");
+    ASSERT_STREQ(my_array->contents[1], "ccc");
+    ASSERT_STREQ(my_array->contents[2], "aaa");
+    ASSERT_STREQ(my_array->contents[3], string_1);
+    ASSERT_NUMEQ(my_array->used, 3);
+    ASSERT_NUMEQ(my_array->length, 4);
+
+    M4ARRAY_FREE(my_array, STRING_ARRAY);
 
 	return 0;
 }

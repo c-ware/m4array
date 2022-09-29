@@ -34,7 +34,6 @@ int main() {
 	string_4[2] = 'z';
 	string_4[3] = '\0';
 
-
 	my_array = M4ARRAY_INIT(my_array, STRING_ARRAY);	
 
 	M4ARRAY_APPEND(my_array, string_1, STRING_ARRAY);

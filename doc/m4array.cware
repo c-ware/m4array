@@ -1,4 +1,4 @@
-.TH "m4array" "cware" "Sep 27, 2022" "" "C-Ware Manuals"
+.TH "m4array" "cware" "Sep 30, 2022" "" "C-Ware Manuals"
 .br
 .SH NAME
 .br
@@ -88,6 +88,7 @@ M4ARRAY_FOREACH(cware);run an operaton for each element
 M4ARRAY_MAP(cware);apply an operation in place
 M4ARRAY_CLEAR(cware);free each element and set the length to 0
 M4ARRAY_FILTER(cware);filter based off a predictate
+M4ARRAY_DECLARE(cware);declare a new array structure
 .TE
 .SH EXAMPLES
 .br

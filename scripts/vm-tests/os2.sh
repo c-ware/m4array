@@ -19,14 +19,14 @@ cd "$PROJECT_PARENT"
 p7zip16.02_7za a "$TEMP_DIR"/"$PROJECT_NAME".zip "$PROJECT_NAME" > /dev/null
 
 # Purge the temporary directory's contents
-$VM_ROOT/control/$VM_NAME/exec.sh "delpath $TARGET_TEMP_DIR /y"
+$VM_ROOT/control/$VM_NAME/exec.sh "delpath $TARGET_TEMP_DIR /y > JUNK"
 $VM_ROOT/control/$VM_NAME/exec.sh "mkdir $TARGET_TEMP_DIR"
 
 # Send it
 $VM_ROOT/control/$VM_NAME/send.sh "$TEMP_DIR"/"$PROJECT_NAME".zip $TARGET_TEMP_DIR
 
 # Extract it on the target
-$VM_ROOT/control/$VM_NAME/exec.sh "cd $TARGET_TEMP_DIR && unzip -o $TARGET_TEMP_DIR/$PROJECT_NAME.zip"
+$VM_ROOT/control/$VM_NAME/exec.sh "cd $TARGET_TEMP_DIR && unzip -qq -o $TARGET_TEMP_DIR/$PROJECT_NAME.zip"
 
 # Build it, then run tests
 $VM_ROOT/control/$VM_NAME/exec.sh "cd $TARGET_TEMP_DIR\\$PROJECT_NAME && wmake -f Makefile.wat"

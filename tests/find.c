@@ -1,5 +1,5 @@
 /*
- * Test finding data inthe array
+ * Testing of the find operation.
 */
 
 #include "common.h"
@@ -26,6 +26,7 @@
 #      define CWUTILS_NULL    ((void *) 0)
 #   endif
 #endif
+
 
 
 
@@ -89,121 +90,163 @@
 
 
 
-int main() {
+void test_find() {
     int index = 0;
-	struct StringArray *my_array = 0;
-	char *string_1 = (CWUTILS_GENERIC) malloc(4);
-	char *string_2 = (CWUTILS_GENERIC) malloc(4);
-	char *string_3 = (CWUTILS_GENERIC) malloc(4);
-	char *string_4 = (CWUTILS_GENERIC) malloc(4);
-	char *string_5 = (CWUTILS_GENERIC) malloc(4);
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
 
-	/* Fill up the input strings */
-	string_1[0] = 'f';
-	string_1[1] = 'o';
-	string_1[2] = 'o';
-	string_1[3] = '\0';
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
 
-	string_2[0] = 'b';
-	string_2[1] = 'a';
-	string_2[2] = 'r';
-	string_2[3] = '\0';
-
-	string_3[0] = 'b';
-	string_3[1] = 'a';
-	string_3[2] = 'z';
-	string_3[3] = '\0';
-
-	string_4[0] = 'q';
-	string_4[1] = 'u';
-	string_4[2] = 'z';
-	string_4[3] = '\0';
-
-	string_5[0] = 'q';
-	string_5[1] = 'a';
-	string_5[2] = 'z';
-	string_5[3] = '\0';
-
-
-	my_array = 
-	(struct StringArray *) malloc(sizeof(*(my_array)));
-	(my_array)->used = 0;
-	(my_array)->length = 0;
-	(my_array)->capacity = 3;
-	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
-;	
-
-	
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
-	}
-
-    /* If used < length, that means we have data in the array that
-       is currently unused, but initialized. We can reuse it. Otherwise,
-       we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
-        
-    } else {
-	    (my_array)->contents[(my_array)->length] = (string_1);
-	    (my_array)->length++;
-    }
-
-    (my_array)->used++;
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
 ;
-	
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
-
-    /* If used < length, that means we have data in the array that
-       is currently unused, but initialized. We can reuse it. Otherwise,
-       we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
-        
-    } else {
-	    (my_array)->contents[(my_array)->length] = (string_2);
-	    (my_array)->length++;
-    }
-
-    (my_array)->used++;
+} while(0)
 ;
-	
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
-	}
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_3);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
 ;
-	
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_4);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
+
+    (array)->used++;
 ;
 
     index = 
@@ -216,8 +259,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "qaz") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "foo") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -227,7 +270,7 @@ int main() {
 		}
 	} while(0)
 ;
-    ASSERT_NUMEQ(index, -1);
+    ASSERT_NUMEQ(index, 0);
 
     index = 
 	-1;
@@ -239,54 +282,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "quz") == 0) == 0) {
-				__M4_INDEX++;
-				continue;
-			}
-
-			(index) = __M4_INDEX;
-			break;
-		}
-	} while(0)
-;
-    ASSERT_NUMEQ(index, 3);
-
-    index = 
-	-1;
-
-	(index) = -1;
-
-	
-
-	do {
-		int __M4_INDEX = 0;
-
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "baz") == 0) == 0) {
-				__M4_INDEX++;
-				continue;
-			}
-
-			(index) = __M4_INDEX;
-			break;
-		}
-	} while(0)
-;
-    ASSERT_NUMEQ(index, 2);
-
-    index = 
-	-1;
-
-	(index) = -1;
-
-	
-
-	do {
-		int __M4_INDEX = 0;
-
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "bar") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "bar") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -308,8 +305,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "foo") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "baz") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -319,10 +316,7 @@ int main() {
 		}
 	} while(0)
 ;
-    ASSERT_NUMEQ(index, 0);
-
-    /* Make sure the find operation does not go past the length. */
-    my_array->used = 0;
+    ASSERT_NUMEQ(index, 2);
 
     index = 
 	-1;
@@ -334,8 +328,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "qaz") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "tuna") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -345,7 +339,7 @@ int main() {
 		}
 	} while(0)
 ;
-    ASSERT_NUMEQ(index, -1);
+    ASSERT_NUMEQ(index, 3);
 
     index = 
 	-1;
@@ -357,8 +351,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "quz") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "spam") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -368,6 +362,7 @@ int main() {
 		}
 	} while(0)
 ;
+    ASSERT_NUMEQ(index, 4);
 
     index = 
 	-1;
@@ -379,8 +374,8 @@ int main() {
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "baz") == 0) == 0) {
+		while(__M4_INDEX < (array)->used) {
+			if((strcmp((array)->contents[__M4_INDEX], "thud") == 0) == 0) {
 				__M4_INDEX++;
 				continue;
 			}
@@ -390,67 +385,25 @@ int main() {
 		}
 	} while(0)
 ;
-    ASSERT_NUMEQ(index, -1);
+    ASSERT_NUMEQ(index, 5);
 
-    index = 
-	-1;
-
-	(index) = -1;
-
-	
-
+    
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "bar") == 0) == 0) {
-				__M4_INDEX++;
-				continue;
-			}
-
-			(index) = __M4_INDEX;
-			break;
-		}
-	} while(0)
-;
-    ASSERT_NUMEQ(index, -1);
-
-    index = 
-	-1;
-
-	(index) = -1;
-
-	
-
-	do {
-		int __M4_INDEX = 0;
-
-		while(__M4_INDEX < (my_array)->used) {
-			if((strcmp((my_array)->contents[__M4_INDEX], "foo") == 0) == 0) {
-				__M4_INDEX++;
-				continue;
-			}
-
-			(index) = __M4_INDEX;
-			break;
-		}
-	} while(0)
-;
-    ASSERT_NUMEQ(index, -1);
-
-	
-	do {
-		int __M4_INDEX = 0;
-
-		while(__M4_INDEX < (my_array)->length) {
-			free((my_array)->contents[__M4_INDEX]);
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
 
-		free((my_array)->contents);
-		free((my_array));
+		free((array)->contents);
+		free((array));
 	} while(0)
 ;
+}
 
-	return 0;
+int main() {
+    test_find();
+
+    return 0;
 }

@@ -73,20 +73,20 @@ do {                                                                            
  * ================================
 */
 
-#define ASSERT_PTREQ(x, y)                                                                                                                                              \
-do {                                                                                                                                                                    \
-    if(((char *) x) != ((char *) y)) {                                                                                                                                  \
-        fprintf(LIBASSERT_ERROR_STREAM, "assertion failed; pointers %p and %p are not equal! (%s:%i)\n", (CWUTILS_GENERIC) x, (CWUTILS_GENERIC) y, __FILE__, __LINE__); \
-        abort();                                                                                                                                                        \
-    }                                                                                                                                                                   \
+#define ASSERT_PTREQ(x, y)                                                                                                                                                  \
+do {                                                                                                                                                                        \
+    if(((char *) x) != ((char *) y)) {                                                                                                                                      \
+        fprintf(LIBASSERT_ERROR_STREAM, "assertion failed; pointers %p and %p are not equal! (%s:%i)\n", (CWUTILS_GENERIC) (x), (CWUTILS_GENERIC) (y), __FILE__, __LINE__); \
+        abort();                                                                                                                                                            \
+    }                                                                                                                                                                       \
 } while(0)
 
-#define ASSERT_PTRNEQ(x, y)                                                                                                                                         \
-do {                                                                                                                                                                \
-    if(((char *) x) == ((char *) y)) {                                                                                                                              \
-        fprintf(LIBASSERT_ERROR_STREAM, "assertion failed; pointers %p and %p are equal! (%s:%i)\n", (CWUTILS_GENERIC) x, (CWUTILS_GENERIC) y, __FILE__, __LINE__); \
-        abort();                                                                                                                                                    \
-    }                                                                                                                                                               \
+#define ASSERT_PTRNEQ(x, y)                                                                                                                                             \
+do {                                                                                                                                                                    \
+    if(((char *) x) == ((char *) y)) {                                                                                                                                  \
+        fprintf(LIBASSERT_ERROR_STREAM, "assertion failed; pointers %p and %p are equal! (%s:%i)\n", (CWUTILS_GENERIC) (x), (CWUTILS_GENERIC) (y), __FILE__, __LINE__); \
+        abort();                                                                                                                                                        \
+    }                                                                                                                                                                   \
 } while(0)
 
 /*

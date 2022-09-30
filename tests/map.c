@@ -1,5 +1,5 @@
 /*
- * Test mapping an operation to an array
+ * Testing of the map operation.
 */
 
 #include "common.h"
@@ -26,6 +26,7 @@
 #      define CWUTILS_NULL    ((void *) 0)
 #   endif
 #endif
+
 
 
 
@@ -89,20 +90,40 @@
 
 
 
-int main() {
-	struct IntArray *array = 
-	(struct IntArray *) malloc(sizeof(*(array)));
+void test_map() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
 	(array)->capacity = 3;
-	(array)->contents = (int *) malloc(sizeof(int) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
 ;
 
     
-	if((array)->length == (array)->capacity) {
-		(array)->contents = (int *) realloc((array)->contents, sizeof(int) * ((array)->capacity * 2));
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -110,17 +131,21 @@ int main() {
     if((array)->used < (array)->length) {
         
     } else {
-	    (array)->contents[(array)->length] = (1);
+	    (array)->contents[(array)->length] = (a);
 	    (array)->length++;
     }
 
     (array)->used++;
 ;
     
-	if((array)->length == (array)->capacity) {
-		(array)->contents = (int *) realloc((array)->contents, sizeof(int) * ((array)->capacity * 2));
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -128,17 +153,21 @@ int main() {
     if((array)->used < (array)->length) {
         
     } else {
-	    (array)->contents[(array)->length] = (2);
+	    (array)->contents[(array)->length] = (b);
 	    (array)->length++;
     }
 
     (array)->used++;
 ;
     
-	if((array)->length == (array)->capacity) {
-		(array)->contents = (int *) realloc((array)->contents, sizeof(int) * ((array)->capacity * 2));
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -146,17 +175,21 @@ int main() {
     if((array)->used < (array)->length) {
         
     } else {
-	    (array)->contents[(array)->length] = (3);
+	    (array)->contents[(array)->length] = (c);
 	    (array)->length++;
     }
 
     (array)->used++;
 ;
     
-	if((array)->length == (array)->capacity) {
-		(array)->contents = (int *) realloc((array)->contents, sizeof(int) * ((array)->capacity * 2));
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -164,14 +197,58 @@ int main() {
     if((array)->used < (array)->length) {
         
     } else {
-	    (array)->contents[(array)->length] = (4);
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
 	    (array)->length++;
     }
 
     (array)->used++;
 ;
 
-    /* Square all numbers */
+    /* Append text to each string */
     
 	
 
@@ -179,47 +256,25 @@ int main() {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->used) {
-			(array)->contents[__M4_INDEX] = ((array)->contents[__M4_INDEX] * (array)->contents[__M4_INDEX]);
+			(array)->contents[__M4_INDEX] = (strcat((array)->contents[__M4_INDEX], "_spam"));
             __M4_INDEX++;
 		}
 	} while(0)
 ;
 
-    ASSERT_NUMEQ(array->contents[0], 1);
-    ASSERT_NUMEQ(array->contents[1], 4);
-    ASSERT_NUMEQ(array->contents[2], 9);
-    ASSERT_NUMEQ(array->contents[3], 16);
+    ASSERT_STREQ(array->contents[0], "foo_spam");
+    ASSERT_STREQ(array->contents[1], "bar_spam");
+    ASSERT_STREQ(array->contents[2], "baz_spam");
+    ASSERT_STREQ(array->contents[3], "tuna_spam");
+    ASSERT_STREQ(array->contents[4], "spam_spam");
+    ASSERT_STREQ(array->contents[5], "thud_spam");
 
-    /* Square an array with no numbers. Despite there technically
-     * being no numbers, the map function should NOT change the
-     * existing numbers, because that would imply it goes beyond
-     * the length.
-    */
-
-    array->used = 0;
     
-	
-
-	do {
-		int __M4_INDEX = 0;
-
-		while(__M4_INDEX < (array)->used) {
-			(array)->contents[__M4_INDEX] = ((array)->contents[__M4_INDEX] * (array)->contents[__M4_INDEX]);
-            __M4_INDEX++;
-		}
-	} while(0)
-;
-    ASSERT_NUMEQ(array->contents[0], 1);
-    ASSERT_NUMEQ(array->contents[1], 4);
-    ASSERT_NUMEQ(array->contents[2], 9);
-    ASSERT_NUMEQ(array->contents[3], 16);
-
-	
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
-			;
+			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
 
@@ -227,6 +282,10 @@ int main() {
 		free((array));
 	} while(0)
 ;
+}
 
-	return 0;
+int main() {
+    test_map();
+
+    return 0;
 }

@@ -1,5 +1,5 @@
 /*
- * Test popping data from an array.
+ * Testing of the pop operation.
 */
 
 #include "common.h"
@@ -26,6 +26,7 @@
 #      define CWUTILS_NULL    ((void *) 0)
 #   endif
 #endif
+
 
 
 
@@ -89,232 +90,273 @@
 
 
 
-int main() {
-	struct StringArray *my_array = 0;
+void test_pop() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
     char *storage = (char *) CWUTILS_NULL;
-	char *string_1 = (CWUTILS_GENERIC) malloc(4);
-	char *string_2 = (CWUTILS_GENERIC) malloc(4);
-	char *string_3 = (CWUTILS_GENERIC) malloc(4);
-	char *string_4 = (CWUTILS_GENERIC) malloc(4);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
 
-	/* Fill up the input strings */
-	string_1[0] = 'f';
-	string_1[1] = 'o';
-	string_1[2] = 'o';
-	string_1[3] = '\0';
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
 
-	string_2[0] = 'b';
-	string_2[1] = 'a';
-	string_2[2] = 'r';
-	string_2[3] = '\0';
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
 
-	string_3[0] = 'b';
-	string_3[1] = 'a';
-	string_3[2] = 'z';
-	string_3[3] = '\0';
-
-	string_4[0] = 'q';
-	string_4[1] = 'u';
-	string_4[2] = 'z';
-	string_4[3] = '\0';
-
-
-	my_array = 
-	(struct StringArray *) malloc(sizeof(*(my_array)));
-	(my_array)->used = 0;
-	(my_array)->length = 0;
-	(my_array)->capacity = 3;
-	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
-;	
-
-    /* Fill the array up */
     
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_1);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
 ;
     
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_2);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
 ;
     
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_3);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
 ;
     
-	if((my_array)->length == (my_array)->capacity) {
-		(my_array)->contents = (char * *) realloc((my_array)->contents, sizeof(char *) * ((my_array)->capacity * 2));
-		(my_array)->capacity = ((my_array)->capacity * 2);
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
 	}
+} while(0)
+;
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
-    if((my_array)->used < (my_array)->length) {
+    if((array)->used < (array)->length) {
         
     } else {
-	    (my_array)->contents[(my_array)->length] = (string_4);
-	    (my_array)->length++;
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
     }
 
-    (my_array)->used++;
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
 ;
 
-    ASSERT_STREQ(my_array->contents[0], "foo");
-    ASSERT_STREQ(my_array->contents[1], "bar");
-    ASSERT_STREQ(my_array->contents[2], "baz");
-    ASSERT_STREQ(my_array->contents[3], "quz");
-    ASSERT_NUMEQ(my_array->length, 4);
-    ASSERT_NUMEQ(my_array->capacity, 3 * 2);
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
 
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
 
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
 
+    (array)->used++;
+;
+
+    /* Pop some values out of the array */
     storage = 
-	(my_array)->contents[0];
+	(array)->contents[0];
 
-	(storage) = (my_array)->contents[0];
+	(storage) = (array)->contents[0];
 
 	do {
 		int __M4_INDEX = 0;
 
+		(array)->used--;
+		(array)->length--;
+
 		/* Pull everything from index (0), onwards, back by 1. This
            must also pull back any allocated, but unused sections of
            the array, too. */
-		while(__M4_INDEX < (my_array)->length) {
-			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
+		while(__M4_INDEX < (array)->length) {
+			(array)->contents[__M4_INDEX] = (array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
-
-		(my_array)->used--;
-		(my_array)->length--;
 	} while(0)
 ;
 
+    ASSERT_NUMEQ(array->length, 5);
+    ASSERT_NUMEQ(array->used, 5);
     ASSERT_STREQ(storage, "foo");
-    ASSERT_STREQ(my_array->contents[0], "bar");
-    ASSERT_STREQ(my_array->contents[1], "baz");
-    ASSERT_STREQ(my_array->contents[2], "quz");
-    ASSERT_NUMEQ(my_array->length, 3);
-    ASSERT_NUMEQ(my_array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "baz");
+    ASSERT_STREQ(array->contents[2], "tuna");
+    ASSERT_STREQ(array->contents[3], "spam");
+    ASSERT_STREQ(array->contents[4], "thud");
 
     storage = 
-	(my_array)->contents[0];
+	(array)->contents[0];
 
-	(storage) = (my_array)->contents[1];
+	(storage) = (array)->contents[1];
 
 	do {
 		int __M4_INDEX = 1;
 
+		(array)->used--;
+		(array)->length--;
+
 		/* Pull everything from index (1), onwards, back by 1. This
            must also pull back any allocated, but unused sections of
            the array, too. */
-		while(__M4_INDEX < (my_array)->length) {
-			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
+		while(__M4_INDEX < (array)->length) {
+			(array)->contents[__M4_INDEX] = (array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
-
-		(my_array)->used--;
-		(my_array)->length--;
 	} while(0)
 ;
 
+    ASSERT_NUMEQ(array->length, 4);
+    ASSERT_NUMEQ(array->used, 4);
     ASSERT_STREQ(storage, "baz");
-    ASSERT_STREQ(my_array->contents[0], "bar");
-    ASSERT_STREQ(my_array->contents[1], "quz");
-    ASSERT_NUMEQ(my_array->length, 2);
-    ASSERT_NUMEQ(my_array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "tuna");
+    ASSERT_STREQ(array->contents[2], "spam");
+    ASSERT_STREQ(array->contents[3], "thud");
 
     storage = 
-	(my_array)->contents[0];
+	(array)->contents[0];
 
-	(storage) = (my_array)->contents[1];
+	(storage) = (array)->contents[2];
 
 	do {
-		int __M4_INDEX = 1;
+		int __M4_INDEX = 2;
 
-		/* Pull everything from index (1), onwards, back by 1. This
+		(array)->used--;
+		(array)->length--;
+
+		/* Pull everything from index (2), onwards, back by 1. This
            must also pull back any allocated, but unused sections of
            the array, too. */
-		while(__M4_INDEX < (my_array)->length) {
-			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
+		while(__M4_INDEX < (array)->length) {
+			(array)->contents[__M4_INDEX] = (array)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
-
-		(my_array)->used--;
-		(my_array)->length--;
 	} while(0)
 ;
 
-    ASSERT_STREQ(storage, "quz");
-    ASSERT_STREQ(my_array->contents[0], "bar");
-    ASSERT_NUMEQ(my_array->length, 1);
-    ASSERT_NUMEQ(my_array->capacity, 3 * 2);
+    ASSERT_NUMEQ(array->length, 3);
+    ASSERT_NUMEQ(array->used, 3);
+    ASSERT_STREQ(storage, "spam");
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "tuna");
+    ASSERT_STREQ(array->contents[2], "thud");
 
-    storage = 
-	(my_array)->contents[0];
-
-	(storage) = (my_array)->contents[0];
-
+    
 	do {
 		int __M4_INDEX = 0;
 
-		/* Pull everything from index (0), onwards, back by 1. This
-           must also pull back any allocated, but unused sections of
-           the array, too. */
-		while(__M4_INDEX < (my_array)->length) {
-			(my_array)->contents[__M4_INDEX] = (my_array)->contents[__M4_INDEX + 1];
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
 
-		(my_array)->used--;
-		(my_array)->length--;
+		free((array)->contents);
+		free((array));
 	} while(0)
 ;
+}
 
-    ASSERT_STREQ(storage, "bar");
-    ASSERT_NUMEQ(my_array->length, 0);
-    ASSERT_NUMEQ(my_array->capacity, 3 * 2);
+int main() {
+    test_pop();
 
-	return 0;
+    return 0;
 }

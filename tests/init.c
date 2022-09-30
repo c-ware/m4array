@@ -1,5 +1,5 @@
 /*
- * Test initializing the array
+ * Testing of the initialization operation.
 */
 
 #include "common.h"
@@ -26,6 +26,7 @@
 #      define CWUTILS_NULL    ((void *) 0)
 #   endif
 #endif
+
 
 
 
@@ -89,21 +90,41 @@
 
 
 
+/* Test the state of the initialized array */
+void test_init_state() {
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    ASSERT_PTRNEQ(array, CWUTILS_NULL);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->length, 0);
+    ASSERT_NUMEQ(array->capacity, 3);
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
 int main() {
-	struct StringArray *my_array = 0;
+    test_init_state();
 
-	my_array = 
-	(struct StringArray *) malloc(sizeof(*(my_array)));
-	(my_array)->used = 0;
-	(my_array)->length = 0;
-	(my_array)->capacity = 3;
-	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
-;	
-
-    ASSERT_NUMEQ(my_array->used, 0);
-    ASSERT_NUMEQ(my_array->length, 0);
-    ASSERT_NUMEQ(my_array->capacity, 3);
-    ASSERT_PTRNEQ(my_array->contents, CWUTILS_NULL);
-
-	return 0;
+    return 0;
 }

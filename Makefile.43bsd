@@ -44,7 +44,7 @@ M4=m4
 
 CC=cc
 CFLAGS=-D__QuasiBSD__
-TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append tests/filter 
+TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
 
 all: $(TESTS)
 
@@ -53,6 +53,8 @@ clean:
 
 .SUFFIXES:
 
+tests/resize: tests/resize.c 
+	$(CC) tests/resize.c $(CFLAGS) -o tests/resize
 tests/foreach: tests/foreach.c 
 	$(CC) tests/foreach.c $(CFLAGS) -o tests/foreach
 tests/append: tests/append.c 

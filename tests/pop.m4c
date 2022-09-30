@@ -1,0 +1,77 @@
+/*
+ * Testing of the pop operation.
+*/
+
+#include "common.h"
+
+include(template/common.m4)
+
+void test_pop() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    char *storage = (char *) CWUTILS_NULL;
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Pop some values out of the array */
+    storage = M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
+
+    ASSERT_NUMEQ(array->length, 5);
+    ASSERT_NUMEQ(array->used, 5);
+    ASSERT_STREQ(storage, "foo");
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "baz");
+    ASSERT_STREQ(array->contents[2], "tuna");
+    ASSERT_STREQ(array->contents[3], "spam");
+    ASSERT_STREQ(array->contents[4], "thud");
+
+    storage = M4ARRAY_POP(array, 1, storage, STRING_ARRAY);
+
+    ASSERT_NUMEQ(array->length, 4);
+    ASSERT_NUMEQ(array->used, 4);
+    ASSERT_STREQ(storage, "baz");
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "tuna");
+    ASSERT_STREQ(array->contents[2], "spam");
+    ASSERT_STREQ(array->contents[3], "thud");
+
+    storage = M4ARRAY_POP(array, 2, storage, STRING_ARRAY);
+
+    ASSERT_NUMEQ(array->length, 3);
+    ASSERT_NUMEQ(array->used, 3);
+    ASSERT_STREQ(storage, "spam");
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "bar");
+    ASSERT_STREQ(array->contents[1], "tuna");
+    ASSERT_STREQ(array->contents[2], "thud");
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+int main() {
+    test_pop();
+
+    return 0;
+}

@@ -6,7 +6,7 @@ CC=cc
 CPP=/lib/cpp
 CFLAGS=
 CPPFLAGS=-I/usr/include
-TESTS=CONVERT_FILES(tests, .m4)
+TESTS=CONVERT_FILES(tests, .m4c)
 
 all: $(TESTS)
 

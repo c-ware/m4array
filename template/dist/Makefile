@@ -4,10 +4,10 @@ dnl files, generates documentation, etc.
 M4=m4
 
 CC=cc
-CFLAGS=-Wall -Wextra -Wpedantic
-SRCS=CONVERT_FILES(tests, .m4, .c) CONVERT_FILES(examples, .m4, .c)
-TESTS=CONVERT_FILES(tests, .m4)
-EXAMPLES=CONVERT_FILES(examples, .m4)
+CFLAGS=-Wall -Wextra -Wpedantic -g
+SRCS=CONVERT_FILES(tests, .m4c, .c) CONVERT_FILES(examples, .m4c, .c)
+TESTS=CONVERT_FILES(tests, .m4c)
+EXAMPLES=CONVERT_FILES(examples, .m4c)
 
 all: $(SRCS) $(TESTS) $(EXAMPLES)
 
@@ -24,10 +24,10 @@ dist_clean:
 
 .SUFFIXES:
 
-GENERATE_RULES(tests, .m4, .c)
-GENERATE_RULES(tests, .m4, ,.c)
+GENERATE_RULES(tests, .m4c, .c)
+GENERATE_RULES(tests, .m4c, ,.c)
 
-GENERATE_RULES(examples, .m4, .c)
-GENERATE_RULES(examples, .m4, ,.c)
+GENERATE_RULES(examples, .m4c, .c)
+GENERATE_RULES(examples, .m4c, ,.c)
 
 .PHONY: all clean dist dist_clean

@@ -1,5 +1,5 @@
 /*
- * Test releasing the array
+ * Testing of the free operation.
 */
 
 #include "common.h"
@@ -26,6 +26,7 @@
 #      define CWUTILS_NULL    ((void *) 0)
 #   endif
 #endif
+
 
 
 
@@ -89,30 +90,76 @@
 
 
 
-int main() {
-	struct StringArray *my_array = 0;
+void test_free() {
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
 
-	my_array = 
-	(struct StringArray *) malloc(sizeof(*(my_array)));
-	(my_array)->used = 0;
-	(my_array)->length = 0;
-	(my_array)->capacity = 3;
-	(my_array)->contents = (char * *) malloc(sizeof(char *) * 3)
-;	
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
 
     
 	do {
 		int __M4_INDEX = 0;
 
-		while(__M4_INDEX < (my_array)->length) {
-			free((my_array)->contents[__M4_INDEX]);
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
 
-		free((my_array)->contents);
-		free((my_array));
+		free((array)->contents);
+		free((array));
 	} while(0)
 ;
+}
 
-	return 0;
+void test_free_with_items() {
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    array->contents[0] = malloc(16);
+    strcpy(array->contents[0], "foo");
+    array->length++;
+    array->used++;
+
+    array->contents[1] = malloc(16);
+    strcpy(array->contents[1], "bar");
+    array->length++;
+    array->used++;
+
+    array->contents[2] = malloc(16);
+    strcpy(array->contents[2], "baz");
+    array->length++;
+    array->used++;
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
+int main() {
+    test_free();
+    test_free_with_items();
+
+    return 0;
 }

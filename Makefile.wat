@@ -51,13 +51,15 @@ M4=m4
 CC=wcc386
 LD=wlink
 CFLAGS=
-TESTS=tests\foreach.exe tests\append.exe tests\filter.exe tests\init.exe tests\clear.exe tests\map.exe tests\find.exe tests\insert.exe tests\free.exe tests\pop.exe 
+TESTS=tests\resize.exe tests\foreach.exe tests\append.exe tests\filter.exe tests\init.exe tests\clear.exe tests\map.exe tests\find.exe tests\insert.exe tests\free.exe tests\pop.exe 
 
 all: $(TESTS) .symbolic
 
 clean: .symbolic
 	rm -f $(TESTS)
 
+tests\resize.obj: tests\resize.c 
+	$(CC) tests\resize.c -fo=tests\resize.obj $(CFLAGS)
 tests\foreach.obj: tests\foreach.c 
 	$(CC) tests\foreach.c -fo=tests\foreach.obj $(CFLAGS)
 tests\append.obj: tests\append.c 
@@ -79,6 +81,8 @@ tests\free.obj: tests\free.c
 tests\pop.obj: tests\pop.c 
 	$(CC) tests\pop.c -fo=tests\pop.obj $(CFLAGS)
 
+tests\resize.exe: tests\resize.obj 
+	$(LD) FILE tests\resize.obj NAME tests\resize.exe
 tests\foreach.exe: tests\foreach.obj 
 	$(LD) FILE tests\foreach.obj NAME tests\foreach.exe
 tests\append.exe: tests\append.obj 

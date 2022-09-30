@@ -42,10 +42,10 @@
 M4=m4
 
 CC=cc
-CFLAGS=-Wall -Wextra -Wpedantic
-SRCS=tests/clear.c tests/pop.c tests/insert.c tests/map.c tests/init.c tests/foreach.c tests/free.c tests/find.c tests/append.c tests/filter.c  examples/join.c 
-TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append tests/filter 
-EXAMPLES=examples/join 
+CFLAGS=-Wall -Wextra -Wpedantic -g
+SRCS=tests/append.c tests/filter.c tests/free.c tests/clear.c tests/resize.c tests/map.c tests/pop.c tests/foreach.c tests/init.c tests/insert.c tests/find.c  
+TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
+EXAMPLES=
 
 all: $(SRCS) $(TESTS) $(EXAMPLES)
 
@@ -60,54 +60,54 @@ dist_clean:
 
 .SUFFIXES:
 
-tests/clear.c: tests/clear.m4 
-	$(M4) tests/clear.m4 > tests/clear.c
-tests/pop.c: tests/pop.m4 
-	$(M4) tests/pop.m4 > tests/pop.c
-tests/insert.c: tests/insert.m4 
-	$(M4) tests/insert.m4 > tests/insert.c
-tests/map.c: tests/map.m4 
-	$(M4) tests/map.m4 > tests/map.c
-tests/init.c: tests/init.m4 
-	$(M4) tests/init.m4 > tests/init.c
-tests/foreach.c: tests/foreach.m4 
-	$(M4) tests/foreach.m4 > tests/foreach.c
-tests/free.c: tests/free.m4 
-	$(M4) tests/free.m4 > tests/free.c
-tests/find.c: tests/find.m4 
-	$(M4) tests/find.m4 > tests/find.c
-tests/append.c: tests/append.m4 
-	$(M4) tests/append.m4 > tests/append.c
-tests/filter.c: tests/filter.m4 
-	$(M4) tests/filter.m4 > tests/filter.c
+tests/append.c: tests/append.m4c 
+	$(M4) tests/append.m4c > tests/append.c
+tests/filter.c: tests/filter.m4c 
+	$(M4) tests/filter.m4c > tests/filter.c
+tests/free.c: tests/free.m4c 
+	$(M4) tests/free.m4c > tests/free.c
+tests/clear.c: tests/clear.m4c 
+	$(M4) tests/clear.m4c > tests/clear.c
+tests/resize.c: tests/resize.m4c 
+	$(M4) tests/resize.m4c > tests/resize.c
+tests/map.c: tests/map.m4c 
+	$(M4) tests/map.m4c > tests/map.c
+tests/pop.c: tests/pop.m4c 
+	$(M4) tests/pop.m4c > tests/pop.c
+tests/foreach.c: tests/foreach.m4c 
+	$(M4) tests/foreach.m4c > tests/foreach.c
+tests/init.c: tests/init.m4c 
+	$(M4) tests/init.m4c > tests/init.c
+tests/insert.c: tests/insert.m4c 
+	$(M4) tests/insert.m4c > tests/insert.c
+tests/find.c: tests/find.m4c 
+	$(M4) tests/find.m4c > tests/find.c
 
-tests/clear: tests/clear.c 
-	$(CC) tests/clear.c $(CFLAGS) -o tests/clear
-tests/pop: tests/pop.c 
-	$(CC) tests/pop.c $(CFLAGS) -o tests/pop
-tests/insert: tests/insert.c 
-	$(CC) tests/insert.c $(CFLAGS) -o tests/insert
-tests/map: tests/map.c 
-	$(CC) tests/map.c $(CFLAGS) -o tests/map
-tests/init: tests/init.c 
-	$(CC) tests/init.c $(CFLAGS) -o tests/init
-tests/foreach: tests/foreach.c 
-	$(CC) tests/foreach.c $(CFLAGS) -o tests/foreach
-tests/free: tests/free.c 
-	$(CC) tests/free.c $(CFLAGS) -o tests/free
-tests/find: tests/find.c 
-	$(CC) tests/find.c $(CFLAGS) -o tests/find
 tests/append: tests/append.c 
 	$(CC) tests/append.c $(CFLAGS) -o tests/append
 tests/filter: tests/filter.c 
 	$(CC) tests/filter.c $(CFLAGS) -o tests/filter
+tests/free: tests/free.c 
+	$(CC) tests/free.c $(CFLAGS) -o tests/free
+tests/clear: tests/clear.c 
+	$(CC) tests/clear.c $(CFLAGS) -o tests/clear
+tests/resize: tests/resize.c 
+	$(CC) tests/resize.c $(CFLAGS) -o tests/resize
+tests/map: tests/map.c 
+	$(CC) tests/map.c $(CFLAGS) -o tests/map
+tests/pop: tests/pop.c 
+	$(CC) tests/pop.c $(CFLAGS) -o tests/pop
+tests/foreach: tests/foreach.c 
+	$(CC) tests/foreach.c $(CFLAGS) -o tests/foreach
+tests/init: tests/init.c 
+	$(CC) tests/init.c $(CFLAGS) -o tests/init
+tests/insert: tests/insert.c 
+	$(CC) tests/insert.c $(CFLAGS) -o tests/insert
+tests/find: tests/find.c 
+	$(CC) tests/find.c $(CFLAGS) -o tests/find
 
 
-examples/join.c: examples/join.m4 
-	$(M4) examples/join.m4 > examples/join.c
 
-examples/join: examples/join.c 
-	$(CC) examples/join.c $(CFLAGS) -o examples/join
 
 
 .PHONY: all clean dist dist_clean

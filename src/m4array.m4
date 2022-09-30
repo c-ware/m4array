@@ -144,6 +144,14 @@ dnl ==========================
 
 define(`M4ARRAY_INITIAL_LENGTH', `3')
 define(`M4ARRAY_NEXT_SIZE', `(($1)->capacity * 2)')
+define(`__M4ARRAY_RESIZE', `
+do {
+	if((($1)->length == ($1)->capacity) && (($1)->used == ($1)->length)) {
+		($1)->contents = ($2_TYPE *) realloc(($1)->contents, sizeof($2_TYPE) * M4ARRAY_NEXT_SIZE($1));
+		($1)->capacity = M4ARRAY_NEXT_SIZE($1);
+	}
+} while(0)
+')
 
 dnl @docgen_start
 dnl @type: macro
@@ -240,10 +248,7 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_APPEND', `
-	if(($1)->length == ($1)->capacity) {
-		($1)->contents = ($3_TYPE *) realloc(($1)->contents, sizeof($3_TYPE) * M4ARRAY_NEXT_SIZE($1));
-		($1)->capacity = M4ARRAY_NEXT_SIZE($1);
-	}
+    __M4ARRAY_RESIZE($1, $3);
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -290,11 +295,7 @@ dnl @reference: m4array(cware)
 dnl 
 dnl @docgen_end
 define(`M4ARRAY_INSERT', `
-	/* Resize the array if necessary */
-	if(($1)->length == ($1)->capacity) {
-		($1)->contents = ($4_TYPE *) realloc(($1)->contents, sizeof($4_TYPE) * M4ARRAY_NEXT_SIZE($1));
-		($1)->capacity = M4ARRAY_NEXT_SIZE($1);
-	}
+    __M4ARRAY_RESIZE($1, $4);
 
 	do {
 		int __M4_INDEX = ($1)->used - 1;
@@ -363,6 +364,9 @@ define(`M4ARRAY_POP', `
 	do {
 		int __M4_INDEX = $2;
 
+		($1)->used--;
+		($1)->length--;
+
 		/* Pull everything from index ($2), onwards, back by 1. This
            must also pull back any allocated, but unused sections of
            the array, too. */
@@ -370,9 +374,6 @@ define(`M4ARRAY_POP', `
 			($1)->contents[__M4_INDEX] = ($1)->contents[__M4_INDEX + 1];
 			__M4_INDEX++;
 		}
-
-		($1)->used--;
-		($1)->length--;
 	} while(0)
 ')
 

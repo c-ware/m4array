@@ -1,4 +1,4 @@
-.TH "m4array-examples-join" "cware" "Sep 27, 2022" "" "C-Ware Manuals"
+.TH "m4array-examples-join" "cware" "Sep 30, 2022" "" "C-Ware Manuals"
 .br
 .SH NAME
 .br
@@ -24,15 +24,7 @@ define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')
 .br
 
 .br
-struct StringArray {
-.br
-   int length;
-.br
-   int capacity;
-.br
-   char **contents;
-.br
-};
+M4ARRAY_DECLARE(StringArray, char *);
 .br
 
 .br

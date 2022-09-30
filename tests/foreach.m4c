@@ -1,0 +1,49 @@
+/*
+ * Testing of the foreach operation.
+*/
+
+#include "common.h"
+
+include(template/common.m4)
+
+void test_foreach() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    char *buffer = (char *) malloc(96 + 1);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    buffer[0] = 0x0;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Join each string */
+    M4ARRAY_FOREACH(array, `strcat(buffer, $1);');
+    ASSERT_STREQ(buffer, "foobarbaztunaspamthud");
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+int main() {
+    test_foreach();
+
+    return 0;
+}

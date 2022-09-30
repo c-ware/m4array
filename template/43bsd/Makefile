@@ -4,7 +4,7 @@ M4=m4
 
 CC=cc
 CFLAGS=-D__QuasiBSD__
-TESTS=CONVERT_FILES(tests, .m4)
+TESTS=CONVERT_FILES(tests, .m4c)
 
 all: $(TESTS)
 

@@ -46,7 +46,7 @@ CC=cc
 CPP=/lib/cpp
 CFLAGS=
 CPPFLAGS=-I/usr/include
-TESTS=tests/clear tests/pop tests/insert tests/map tests/init tests/foreach tests/free tests/find tests/append tests/filter 
+TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
 
 all: $(TESTS)
 
@@ -55,6 +55,9 @@ clean:
 
 .SUFFIXES:
 
+tests/resize: tests/resize.c 
+	$(CPP) $(CPPFLAGS) tests/resize.c > tests/resize.c.i
+	$(CC) tests/resize.c.i $(CFLAGS) -o tests/resize
 tests/foreach: tests/foreach.c 
 	$(CPP) $(CPPFLAGS) tests/foreach.c > tests/foreach.c.i
 	$(CC) tests/foreach.c.i $(CFLAGS) -o tests/foreach

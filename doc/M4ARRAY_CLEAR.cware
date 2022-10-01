@@ -16,7 +16,11 @@ include(m4array/m4array.m4)
 .br
 This macro will "clear" the array by freeing each element of the array,
 .br
-and setting the length of the array to zero.
+and setting the length of the array to zero. The individual elements of
+.br
+the array will not be freed if memory reuse is enabled-- rather, they will
+.br
+just be set to reusable.
 .br
 
 .br

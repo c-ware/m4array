@@ -14,7 +14,9 @@ include(m4array/m4array.m4)
 .br
 .SH DESCRIPTION
 .br
-This will initialize a new array on the heap.
+This will initialize a new array on the heap. The initial length will be judged
+.br
+by M4ARRAY_INITIAL_LENGTH, and must be released from memory using \fBM4ARRAY_FREE\fR(cware)
 .br
 
 .br

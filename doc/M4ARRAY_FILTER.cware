@@ -14,13 +14,15 @@ include(m4array/m4array.m4)
 .br
 .SH DESCRIPTION
 .br
-This macro will evaluate a macro for each element in the array, and
+This macro will evaluate a predicate for each element in the array, and
 .br
 if that element does not match the predicate, it will be removed from
 .br
 the array. Each value that does not pass the filter will be released
 .br
-from memory.
+from memory unless the array namespace has memory reuse, in which case,
+.br
+those values will be made reusable.
 .br
 
 .br

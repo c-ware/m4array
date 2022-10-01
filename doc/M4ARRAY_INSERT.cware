@@ -16,7 +16,13 @@ include(m4array/m4array.m4)
 .br
 This macro will take a value, and insert it into an array at a given
 .br
-index.
+index. Everything after the index that is inserted into will be shifted
+.br
+over by one slot to make room for the new element. If the array namespace
+.br
+has memory reuse, then any unused slots will be used before extending the
+.br
+array.
 .br
 
 .br

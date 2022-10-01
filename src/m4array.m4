@@ -195,7 +195,8 @@ dnl
 dnl @include: m4array/m4array.m4
 dnl 
 dnl @description
-dnl @This will initialize a new array on the heap.
+dnl @This will initialize a new array on the heap. The initial length will be judged
+dnl @by M4ARRAY_INITIAL_LENGTH, and must be released from memory using \BM4ARRAY_FREE\B(cware)
 dnl @description
 dnl
 dnl @examples
@@ -228,7 +229,10 @@ dnl @include: m4array/m4array.m4
 dnl
 dnl @description
 dnl @This macro will append a value to an array given, and resize the
-dnl @array if needed using the M4ARRAY_NEXT_SIZE(cware) macro.
+dnl @array if needed using the M4ARRAY_NEXT_SIZE(cware) macro. If the
+dnl @array namespace has memory reuse enabled, the unused slots in the
+dnl @array, if there are any, will be used rather than extending the
+dnl @array itself.
 dnl @description
 dnl
 dnl @examples
@@ -272,7 +276,10 @@ dnl @include: m4array/m4array.m4
 dnl
 dnl @description
 dnl @This macro will take a value, and insert it into an array at a given
-dnl @index.
+dnl @index. Everything after the index that is inserted into will be shifted
+dnl @over by one slot to make room for the new element. If the array namespace
+dnl @has memory reuse, then any unused slots will be used before extending the
+dnl @array.
 dnl @description
 dnl
 dnl @examples
@@ -334,7 +341,10 @@ dnl @include: m4array/m4array.m4
 dnl
 dnl @description
 dnl @This macro will pop a value out of an index in the array, and write it to a
-dnl @variable.
+dnl @variable. Each value in the array after the index that is popped will be
+dnl @shifted over by one slot. Unlike many of the other operations, this operation
+dnl @will not make the popped index a reusable buffer, as the value inside of it
+dnl @will be written to the variable-- thus it is unreusable.
 dnl @description
 dnl
 dnl @examples
@@ -476,10 +486,11 @@ dnl
 dnl @include: m4array/m4array.m4
 dnl
 dnl @description
-dnl @This macro will evaluate a macro for each element in the array, and
+dnl @This macro will evaluate a predicate for each element in the array, and
 dnl @if that element does not match the predicate, it will be removed from
 dnl @the array. Each value that does not pass the filter will be released
-dnl @from memory.
+dnl @from memory unless the array namespace has memory reuse, in which case,
+dnl @those values will be made reusable.
 dnl @description
 dnl
 dnl @examples
@@ -570,7 +581,9 @@ dnl @include: m4array/m4array.m4
 dnl
 dnl @description
 dnl @This macro will "clear" the array by freeing each element of the array,
-dnl @and setting the length of the array to zero.
+dnl @and setting the length of the array to zero. The individual elements of
+dnl @the array will not be freed if memory reuse is enabled-- rather, they will
+dnl @just be set to reusable.
 dnl @description
 dnl
 dnl @examples

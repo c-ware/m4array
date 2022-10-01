@@ -16,7 +16,13 @@ include(m4array/m4array.m4)
 .br
 This macro will append a value to an array given, and resize the
 .br
-array if needed using the M4ARRAY_NEXT_SIZE(cware) macro.
+array if needed using the M4ARRAY_NEXT_SIZE(cware) macro. If the
+.br
+array namespace has memory reuse enabled, the unused slots in the
+.br
+array, if there are any, will be used rather than extending the
+.br
+array itself.
 .br
 
 .br

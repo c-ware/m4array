@@ -127,17 +127,17 @@ void test_free_with_items() {
 	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
 ;
 
-    array->contents[0] = malloc(16);
+    array->contents[0] = (char *) malloc(16);
     strcpy(array->contents[0], "foo");
     array->length++;
     array->used++;
 
-    array->contents[1] = malloc(16);
+    array->contents[1] = (char *) malloc(16);
     strcpy(array->contents[1], "bar");
     array->length++;
     array->used++;
 
-    array->contents[2] = malloc(16);
+    array->contents[2] = (char *) malloc(16);
     strcpy(array->contents[2], "baz");
     array->length++;
     array->used++;

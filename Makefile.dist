@@ -42,7 +42,7 @@
 M4=m4
 
 CC=cc
-CFLAGS=-Wall -Wextra -Wpedantic -g
+CFLAGS=-Wall -Wextra -Wpedantic -Wno-unused-but-set-variable -g
 SRCS=tests/append.c tests/filter.c tests/free.c tests/clear.c tests/resize.c tests/map.c tests/pop.c tests/foreach.c tests/init.c tests/insert.c tests/find.c  
 TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
 EXAMPLES=

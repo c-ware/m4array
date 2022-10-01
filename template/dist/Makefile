@@ -4,7 +4,7 @@ dnl files, generates documentation, etc.
 M4=m4
 
 CC=cc
-CFLAGS=-Wall -Wextra -Wpedantic -g
+CFLAGS=-Wall -Wextra -Wpedantic -Wno-unused-but-set-variable -g
 SRCS=CONVERT_FILES(tests, .m4c, .c) CONVERT_FILES(examples, .m4c, .c)
 TESTS=CONVERT_FILES(tests, .m4c)
 EXAMPLES=CONVERT_FILES(examples, .m4c)

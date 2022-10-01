@@ -54,8 +54,143 @@ void test_find() {
     M4ARRAY_FREE(array, STRING_ARRAY);
 }
 
+void test_find_doesnt_search_unused_sections() {
+    int index = 0;
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Cut off the last two elements, then try to find them. */
+    array->used = 4;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "spam") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "thud") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Since we verified that the find operation doesn't check past the
+ * used length, we need to make sure it still searches in a used length
+ * that is not equal to the length of the array, like used = 0, used = 1,
+ * used = 2, etc*/
+void test_find_searches_before_used() {
+    int index = 0;
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* We only allow it to search 4 of the first strings */
+    array->used = 4;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, 0);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "bar") == 0');
+    ASSERT_NUMEQ(index, 1);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "baz") == 0');
+    ASSERT_NUMEQ(index, 2);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "tuna") == 0');
+    ASSERT_NUMEQ(index, 3);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "spam") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    /* We only allow it to search 3 of the first strings */
+    array->used = 3;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, 0);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "bar") == 0');
+    ASSERT_NUMEQ(index, 1);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "baz") == 0');
+    ASSERT_NUMEQ(index, 2);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "tuna") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    /* We only allow it to search 2 of the first strings */
+    array->used = 2;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, 0);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "bar") == 0');
+    ASSERT_NUMEQ(index, 1);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "baz") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    /* We only allow it to search 1 of the first strings */
+    array->used = 1;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, 0);
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "bar") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    /* We only allow it to search 0 of the first strings */
+    array->used = 0;
+
+    index = M4ARRAY_FIND(array, index, `strcmp($1, "foo") == 0');
+    ASSERT_NUMEQ(index, -1);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
 int main() {
     test_find();
+    test_find_doesnt_search_unused_sections();
+    test_find_searches_before_used();
 
     return 0;
 }

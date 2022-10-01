@@ -490,10 +490,10 @@ dnl @param: 1
 dnl @brief: pointer to the array to filter to
 dnl
 dnl @param: 2
-dnl @brief: the macro body to execute
+dnl @brief: the namespace of the array
 dnl
 dnl @param: 3
-dnl @brief: the namespace of the array
+dnl @brief: the macro body to execute
 dnl
 dnl @reference: m4array(cware)
 dnl
@@ -519,7 +519,7 @@ dnl release each element that did not pass the filter from memory. Each element
 dnl that passed the filter will be in the range [0, L), and each element that
 dnl did not pass the filter will be from range [L, len(A))
 define(`M4ARRAY_FILTER', `
-	define(`M4ARRAY_LAMBDA', `$2')
+	define(`M4ARRAY_LAMBDA', `$3')
 
 	do {
 		int __M4_INDEX = 0;
@@ -528,7 +528,7 @@ define(`M4ARRAY_FILTER', `
 		while(__M4_INDEX < ($1)->used) {
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 1) {
-                $3_TYPE __M4_TEMP = ($1)->contents[__M4_CURSOR];
+                $2_TYPE __M4_TEMP = ($1)->contents[__M4_CURSOR];
 
                 ($1)->contents[__M4_CURSOR] = ($1)->contents[__M4_INDEX];
                 ($1)->contents[__M4_INDEX] = __M4_TEMP;
@@ -542,16 +542,16 @@ define(`M4ARRAY_FILTER', `
            Otherwise, length should stay the same as the used count. Normally,
            at first thought, we should do x = (y + 1), but we do not have to,
            since y will be equal to the length of the array. */
-        ifdef(`$3_REUSE', `($1)->used = __M4_CURSOR;')
+        ifdef(`$2_REUSE', `($1)->used = __M4_CURSOR;')
 
         /* If we do not enforce memory reuse, everything after __M4_CURSOR
            must be freed, since it will not be reusable. Once this is done,
            we can set the length __M4_CURSOR */
-        ifdef(`$3_REUSE', `', `
+        ifdef(`$2_REUSE', `', `
             __M4_INDEX = __M4_CURSOR;
 
             while(__M4_INDEX < ($1)->length) {
-                $3_FREE(($1)->contents[__M4_INDEX]);
+                $2_FREE(($1)->contents[__M4_INDEX]);
                 __M4_INDEX++;
             }
 

@@ -6,7 +6,7 @@
 
 include(template/common.m4)
 
-void test_map() {
+void test_filter() {
     char *a = (char *) malloc(16);
     char *b = (char *) malloc(16);
     char *c = (char *) malloc(16);
@@ -33,7 +33,7 @@ void test_map() {
     M4ARRAY_APPEND(array, f, STRING_ARRAY);
 
     /* Filter out strings that begin with b */
-    M4ARRAY_FILTER(array, `($1)[0] != "b"[0]', STRING_ARRAY);
+    M4ARRAY_FILTER(array, STRING_ARRAY, `($1)[0] != "b"[0]');
     ASSERT_NUMEQ(array->length, 4);
     ASSERT_NUMEQ(array->used, 4);
     ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
@@ -43,7 +43,7 @@ void test_map() {
     ASSERT_STREQ(array->contents[3], "thud");
 
     /* Filter out strings that do not begin with with a t */
-    M4ARRAY_FILTER(array, `($1)[0] == "t"[0]', STRING_ARRAY);
+    M4ARRAY_FILTER(array, STRING_ARRAY, `($1)[0] == "t"[0]');
     ASSERT_NUMEQ(array->length, 2);
     ASSERT_NUMEQ(array->used, 2);
     ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
@@ -53,8 +53,186 @@ void test_map() {
     M4ARRAY_FREE(array, STRING_ARRAY);
 }
 
+void test_filter_with_reusable_memory() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Filter out strings that begin with b */
+    M4ARRAY_FILTER(array, STRING_ARRAY_RE, `($1)[0] != "b"[0]');
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 4);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "foo");
+    ASSERT_STREQ(array->contents[1], "tuna");
+    ASSERT_STREQ(array->contents[2], "spam");
+    ASSERT_STREQ(array->contents[3], "thud");
+
+    /* Filter out strings that do not begin with with a t */
+    M4ARRAY_FILTER(array, STRING_ARRAY_RE, `($1)[0] == "t"[0]');
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+    ASSERT_STREQ(array->contents[0], "tuna");
+    ASSERT_STREQ(array->contents[1], "thud");
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Test that filter does not interact with anything outside
+ * of the bounds of the used field. Or at the very least, if it does,
+ * it does not affect the final array. */
+void test_filter_respects_used_bounds() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* We want to verify that the filter opeation does not
+     * deal with anything past the c string (index 2) */
+    array->used = 3;
+
+    M4ARRAY_FILTER(array, STRING_ARRAY_RE, `($1)[0] == "t"[0]');
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 0);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Test that the filter operation does not actually modify
+ * the used elements of the array-- not the unused, but
+ * allocated parts. */
+void test_filter_doesnt_modify_used_array_elements() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Filter out all strings with a length of 3 */
+    M4ARRAY_FILTER(array, STRING_ARRAY, `strlen($1) != 3');
+
+    /* Make sure the filter operation did not change any of the
+     * actual strings themselves. Since without memory reuse, the
+     * filter operation DOES free items that do not pass the filter,
+     * so we do not test those. (they are commented out) */
+    /*ASSERT_STREQ(a, "foo");*/
+    /*ASSERT_STREQ(b, "bar");*/
+    /*ASSERT_STREQ(c, "baz");*/
+    ASSERT_STREQ(d, "tuna");
+    ASSERT_STREQ(e, "spam");
+    ASSERT_STREQ(f, "thud");
+}
+
+/* Test that the filter operation does not modify the items
+ * that were filtered in cases where we want to reuse memory.
+ * Unlike when we do not want to reuse memory, the filter operation
+ * will not free items that do not pass the filter. */
+void test_filter_doesnt_modify_unused_array_elements() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    /* Filter out all strings with a length of 3 */
+    M4ARRAY_FILTER(array, STRING_ARRAY_RE, `strlen($1) != 3');
+
+    /* Make sure the filter operation did not change any of the
+     * actual strings themselves. */
+    ASSERT_STREQ(a, "foo");
+    ASSERT_STREQ(b, "bar");
+    ASSERT_STREQ(c, "baz");
+    ASSERT_STREQ(d, "tuna");
+    ASSERT_STREQ(e, "spam");
+    ASSERT_STREQ(f, "thud");
+}
+
 int main() {
-    test_map();
+    test_filter();
+    test_filter_with_reusable_memory();
+    test_filter_respects_used_bounds();
+    test_filter_doesnt_modify_used_array_elements();
+    test_filter_doesnt_modify_unused_array_elements();
 
     return 0;
 }

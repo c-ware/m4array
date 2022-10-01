@@ -28,9 +28,9 @@ from memory.
 .br
 \fI$1\fR will be pointer to the array to filter to
 .br
-\fI$2\fR will be the macro body to execute
+\fI$2\fR will be the namespace of the array
 .br
-\fI$3\fR will be the namespace of the array
+\fI$3\fR will be the macro body to execute
 .br
 .SH EXAMPLES
 .br

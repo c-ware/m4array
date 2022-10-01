@@ -481,7 +481,6 @@ do {
     ASSERT_STREQ(buffer, "foobarbaz");
     buffer[0] = 0x0;
 
-
     /* Only join the first 2 strings */
     array->used = 2;
 

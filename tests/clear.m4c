@@ -85,9 +85,181 @@ void test_clear_reuse() {
     M4ARRAY_FREE(array, STRING_ARRAY);
 }
 
+/* Attempt to clear an array with stuff in it, but that has a length of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will not reuse memory, so it will free the contents of the array. */
+void test_clear_length_zero_array_no_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    array->length = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    M4ARRAY_CLEAR(array, STRING_ARRAY);
+    ASSERT_NUMEQ(array->length, 0);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, M4ARRAY_INITIAL_LENGTH * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Attempt to clear an array with stuff in it, but that has a used of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will reuse memory, so it will not free the contents of the array. */
+void test_clear_length_zero_array_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    M4ARRAY_CLEAR(array, STRING_ARRAY_RE);
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, M4ARRAY_INITIAL_LENGTH * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Attempt to clear an array with stuff in it, but that has a length of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will reuse memory, so it will not free the contents of the array. */
+void test_clear_used_zero_array_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    M4ARRAY_CLEAR(array, STRING_ARRAY_RE);
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, M4ARRAY_INITIAL_LENGTH * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
+/* Attempt to clear an array with stuff in it, but that has a used of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will not reuse memory, so it will free the contents of the array. */
+void test_clear_used_zero_array_no_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = M4ARRAY_INIT(array, STRING_ARRAY);
+
+    M4ARRAY_APPEND(array, a, STRING_ARRAY);
+    M4ARRAY_APPEND(array, b, STRING_ARRAY);
+    M4ARRAY_APPEND(array, c, STRING_ARRAY);
+    M4ARRAY_APPEND(array, d, STRING_ARRAY);
+    M4ARRAY_APPEND(array, e, STRING_ARRAY);
+    M4ARRAY_APPEND(array, f, STRING_ARRAY);
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    M4ARRAY_CLEAR(array, STRING_ARRAY);
+    ASSERT_NUMEQ(array->length, 0);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, M4ARRAY_INITIAL_LENGTH * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    M4ARRAY_FREE(array, STRING_ARRAY);
+}
+
 int main() {
     test_clear();
     test_clear_reuse();
+    test_clear_length_zero_array_no_reuse();
+    test_clear_length_zero_array_reuse();
+    test_clear_used_zero_array_reuse();
+    test_clear_used_zero_array_reuse();
 
     return 0;
 }

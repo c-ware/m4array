@@ -494,9 +494,831 @@ do {
 ;
 }
 
+/* Attempt to clear an array with stuff in it, but that has a length of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will not reuse memory, so it will free the contents of the array. */
+void test_clear_length_zero_array_no_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+
+    array->length = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    
+	do {
+        /* We only need to release the contents of the array if
+           we do not want to reuse memory. If we do want to reuse
+           memory, all we need to do is set the used length to zero
+           to signal to adding functions that there is allocated,
+           but unused slots in the array. */
+        
+		    int __M4_INDEX = 0;
+
+		    while(__M4_INDEX < (array)->used) {
+		    	free((array)->contents[__M4_INDEX]);
+                __M4_INDEX++;
+		    }
+            
+            (array)->length = 0;
+        
+
+        /* Regardless of whether or not we reuse memory, this
+           can be reset to zero. */
+        (array)->used = 0;
+
+	} while(0)
+;
+    ASSERT_NUMEQ(array->length, 0);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
+/* Attempt to clear an array with stuff in it, but that has a used of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will reuse memory, so it will not free the contents of the array. */
+void test_clear_length_zero_array_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    
+	do {
+        /* We only need to release the contents of the array if
+           we do not want to reuse memory. If we do want to reuse
+           memory, all we need to do is set the used length to zero
+           to signal to adding functions that there is allocated,
+           but unused slots in the array. */
+        
+
+        /* Regardless of whether or not we reuse memory, this
+           can be reset to zero. */
+        (array)->used = 0;
+
+	} while(0)
+;
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
+/* Attempt to clear an array with stuff in it, but that has a length of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will reuse memory, so it will not free the contents of the array. */
+void test_clear_used_zero_array_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    
+	do {
+        /* We only need to release the contents of the array if
+           we do not want to reuse memory. If we do want to reuse
+           memory, all we need to do is set the used length to zero
+           to signal to adding functions that there is allocated,
+           but unused slots in the array. */
+        
+
+        /* Regardless of whether or not we reuse memory, this
+           can be reset to zero. */
+        (array)->used = 0;
+
+	} while(0)
+;
+    ASSERT_NUMEQ(array->length, 6);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
+/* Attempt to clear an array with stuff in it, but that has a used of
+ * of zero. Technically, this test only exists to verify that nothing
+ * happens, as the clear function only goes up to the USED length. This
+ * will not reuse memory, so it will free the contents of the array. */
+void test_clear_used_zero_array_no_reuse() {
+    char *a = (char *) malloc(16);
+    char *b = (char *) malloc(16);
+    char *c = (char *) malloc(16);
+    char *d = (char *) malloc(16);
+    char *e = (char *) malloc(16);
+    char *f = (char *) malloc(16);
+    struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
+
+    /* Initialize strings */
+    strcpy(a, "foo"); 
+    strcpy(b, "bar"); 
+    strcpy(c, "baz"); 
+    strcpy(d, "tuna"); 
+    strcpy(e, "spam"); 
+    strcpy(f, "thud"); 
+
+    array = 
+	(struct StringArray *) malloc(sizeof(*(array)));
+	(array)->used = 0;
+	(array)->length = 0;
+	(array)->capacity = 3;
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+;
+
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (a);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (b);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (c);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (d);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (e);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+    
+    
+do {
+	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
+		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
+		(array)->capacity = ((array)->capacity * 2);
+	}
+} while(0)
+;
+
+    /* If used < length, that means we have data in the array that
+       is currently unused, but initialized. We can reuse it. Otherwise,
+       we can just append like normal. */
+    if((array)->used < (array)->length) {
+        
+    } else {
+	    (array)->contents[(array)->length] = (f);
+	    (array)->length++;
+    }
+
+    (array)->used++;
+;
+
+    array->used = 0;
+
+    /* Clear the contents of the array, freeing the elements in it.*/
+    
+	do {
+        /* We only need to release the contents of the array if
+           we do not want to reuse memory. If we do want to reuse
+           memory, all we need to do is set the used length to zero
+           to signal to adding functions that there is allocated,
+           but unused slots in the array. */
+        
+		    int __M4_INDEX = 0;
+
+		    while(__M4_INDEX < (array)->used) {
+		    	free((array)->contents[__M4_INDEX]);
+                __M4_INDEX++;
+		    }
+            
+            (array)->length = 0;
+        
+
+        /* Regardless of whether or not we reuse memory, this
+           can be reset to zero. */
+        (array)->used = 0;
+
+	} while(0)
+;
+    ASSERT_NUMEQ(array->length, 0);
+    ASSERT_NUMEQ(array->used, 0);
+    ASSERT_NUMEQ(array->capacity, 3 * 2);
+    ASSERT_PTRNEQ(array->contents, CWUTILS_NULL);
+
+    
+	do {
+		int __M4_INDEX = 0;
+
+		while(__M4_INDEX < (array)->length) {
+			free((array)->contents[__M4_INDEX]);
+			__M4_INDEX++;
+		}
+
+		free((array)->contents);
+		free((array));
+	} while(0)
+;
+}
+
 int main() {
     test_clear();
     test_clear_reuse();
+    test_clear_length_zero_array_no_reuse();
+    test_clear_length_zero_array_reuse();
+    test_clear_used_zero_array_reuse();
+    test_clear_used_zero_array_reuse();
 
     return 0;
 }

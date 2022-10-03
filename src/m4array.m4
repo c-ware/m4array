@@ -63,7 +63,6 @@ dnl @show_brief: 0
 dnl @embed: @name: M4ARRAY_DECLARE
 dnl @show_brief: 0
 dnl
-dnl
 dnl @description
 dnl @An implementation of a dynamic array in \Bm4\B(1). It is type safe, and provides
 dnl @all of the basic necessities when it comes to a dynamic array, including insertion,
@@ -82,9 +81,9 @@ dnl @   - NeXTSTEP 4.2
 dnl @   - UNIXWare 7.1.4
 dnl @
 dnl @As stated above, it is recommended that you preprocess your \Bm4\B(1) into C files before shipping
-dnl @the code. This makes your code much portable as not all systems have \Bm4\B(1).
+dnl @the code. This makes your code much portable as not all systems have \Bm4\B(1). For a larger
+dnl @introduction into how m4array works, and how to use it, please see \Bm4array-intro\B(cware).
 dnl @
-dnl @Below is a table of the manual of each of operation, along with a brief description.
 dnl @\T
 dnl @\S ;
 dnl @\H Manual;Description
@@ -92,7 +91,7 @@ dnl @\E M4ARRAY_INIT(cware);initialize a new array
 dnl @\E M4ARRAY_APPEND(cware);append a value
 dnl @\E M4ARRAY_INSERT(cware);insert a value at a specific index
 dnl @\E M4ARRAY_POP(cware);pop a value out of an index
-dnl @\E M4ARRAY_FIND(cware);find the location of a value based off a predicate
+dnl @\E M4ARRAY_FIND(cware);find a value that matches a  predicate
 dnl @\E M4ARRAY_FOREACH(cware);run an operaton for each element
 dnl @\E M4ARRAY_MAP(cware);apply an operation in place
 dnl @\E M4ARRAY_CLEAR(cware);free each element and set the length to 0
@@ -111,6 +110,8 @@ dnl @\H Manual;Description;Macros
 dnl @\E m4array-examples-join(cware);joining strings;init,foreach,append,free
 dnl @\T
 dnl @examples
+dnl
+dnl @reference: m4array-intro(cware)
 dnl
 dnl @docgen_end
 
@@ -213,7 +214,7 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_INIT', `
-	($2_ARRAY_TYPE *) malloc(sizeof(*($1)));
+	($2_NAME *) malloc(sizeof(*($1)));
 	($1)->used = 0;
 	($1)->length = 0;
 	($1)->capacity = M4ARRAY_INITIAL_LENGTH;
@@ -258,7 +259,7 @@ define(`M4ARRAY_APPEND', `
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
     if(($1)->used < ($1)->length) {
-        ifdef(`$3_REUSE', `$3_REUSE($2, ($1)->contents[($1)->used]);')
+        ifdef(`$3_REUSE', `$3_REUSE(($1)->contents[($1)->used], ($2));')
     } else {
 	    ($1)->contents[($1)->length] = ($2);
 	    ($1)->length++;
@@ -318,7 +319,7 @@ define(`M4ARRAY_INSERT', `
 		}
 
         if(($1)->used < ($1)->length) {
-            ifdef(`$4_REUSE', `$4_REUSE($2, __M4_TEMP);')
+            ifdef(`$4_REUSE', `$4_REUSE(__M4_TEMP, $2);')
 
             /* We do not increase the length of the array because we do
                not actually increase the length of initialized data. */

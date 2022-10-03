@@ -629,7 +629,7 @@ do {
        is currently unused, but initialized. We can reuse it. Otherwise,
        we can just append like normal. */
     if((array)->used < (array)->length) {
-        ((array)->contents[(array)->used])[0] = 0x0; strcat((array)->contents[(array)->used], g);
+        ((array)->contents[(array)->used])[0] = 0x0; strcat((array)->contents[(array)->used], (g));
     } else {
 	    (array)->contents[(array)->length] = (g);
 	    (array)->length++;

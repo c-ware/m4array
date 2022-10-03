@@ -1,0 +1,153 @@
+.TH "m4array-intro" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.SH NAME
+m4array-intro - a basic introduction to m4array
+.SH SYNOPSIS
+Table of Contents. You can search for lines which start with each of these
+chapter names to jump to them.
+.br
+
+\fBDESCRIPTION\fR
+.RS 0.4i
+A brief introduction of the rationale behind m4array
+.RE
+
+\fBCALLBACK MACROS\fR
+.RS 0.4i
+An explanation of what callback macros are, and how they work.
+.RE
+
+\fBPROPERTIES\fR
+.RS 0.4i
+An explanation of data structure properties, lists of data structure properties, etc
+.RE
+
+.RS 0.4i
+\fBCOMPILATION NOTES\fR
+Notes about compiling on stranger operating systems like ULTRIX and QuasiBSD.
+.RE
+
+
+.SH DESCRIPTION
+This manual serves the purpose of giving the reader a basic introduction to how
+m4array works, and acts as a place explain certain concepts that m4array uses.
+
+Unlike many other data structure implementations, m4array is implemented with
+\fImacros\fR, rather than using language constructs like void pointers. What's even
+more unique about m4array, is that it uses the \fBm4\fR(1) preprocessor as opposed
+to the C preprocessor. Most might ask "what's the point," and the rationale is
+backed by two main reasons.
+   - Portability
+   - Ease of use for the end user
+
+M4 is a much, much more powerful preprocessor than the C preprocessor, and appears
+on pretty much every UNIX system-- including ancient ones like ULTRIX, and 4.3 BSD.
+m4array is designed, first and foremost, for people who want to write \fIhyper\fR
+portable code. As such, it is the assumption that before the code is shipped, you
+preprocess the code with \fBm4\fR(1), This allows us-- people writing code on modern
+systems, to use convenient macro features without worrying about these older systems
+supporting our preprocessor of choice.
+
+
+.SH  CALLBACK MACROS
+In m4array, some operations take a sort of inline-callback macro. For example, \fBM4ARRAY_FIND\fR(cware)
+will take a predicate as an argument. This callback can be a pre-defined macro, or it can be declared
+in-line. If an operation takes a callback macro, the arguments and semantics of the callbaclk should
+be described in the operation's manual page. However, as a reference, this is an example of using the
+\fBM4ARRAY_FIND\fR(cware) operation with an inline-predicate in a heap-allocated array of strings.
+
+\fBindex = M4ARRAY_FIND(my_array, STRING_ARRAY, `strcmp($1, "foo") == 0')\fR
+
+This will find the first occurrence of the string "foo" in the array. It is recommended to put your
+predicates inside whatever you decide to be your M4 string quotes. By default it is a backtick and a
+single quote, though.
+
+
+.SH  PROPERTIES
+Explanations aside, the one truly defining feature of the \fBm4\fR(1) data structure
+implementations is how they store information. The C-Ware data structures, along with
+m4array, use a namespacing system with other macros to hold information about a given
+data structure. Most of the m4array operations will take a \fInamespace\fR argument,
+which is used to access information about that data structure. As an example, say you
+had an array of heap-allocated strings, which should all be released from memory when
+the array is released. If we wanted to \fBinitialize\fR, and \fBfree\fR the array, we would
+need to define a collections of macros which end in the suffixes \fB_TYPE\fR, \fB_NAME\fR,
+and \fB_FREE\fR respectively. For example:
+
+
+.SH  COMPILATION NOTES
+Some of the operating systems that m4array will compile under need a specific macro
+defined for the code to be compiled correctly on that operating system. If you are
+targeting any of the following operating systems, please define the corresponding
+macro to make sure m4array knows what operating system it is on.
+
+define(`STRING_ARRAY_TYPE', `char *')
+.br
+define(`STRING_ARRAY_NAME', `struct StringArray')
+.br
+define(`STRING_ARRAY_FREE', `free($1)')
+.br
+
+In this case, \fISTRING_ARRAY\fR is our namespace. Any macro which might need access to this
+information can just be passed the namespace as an argument, and be on its way. This is how
+all the operations in m4array access external information, if they need it. That being said,
+these macros are for each \fBtype\fR of data structure. If you wanted to instantiate multiple
+arrays of strings, you can use the same namespace. You only need to use other namespaces if
+you are working with other types, and can easily just switch out the namespace for other types
+if needed.
+
+The information stored in macros are usually referred to as data structure properties, or
+just properties. Here is a list of each property, and a description of it. Do note, you
+do not need to define \fIevery\fR macro-- only the ones you need to use. If you use an
+operation, check the notes section of its manual page for what macros it uses.
+
+\fB_TYPE\fR
+.br
+.RS 0.4i
+This property stores the type of data stored in the array. For example, if you wanted
+to store an array of pointers to integers, \fBint *\fR would be stored. Or, if you wanted
+an array of structures named \fBMyStruct\fR, you could have the type bf \fBstruct MyStruct\fR.
+.RE
+
+
+\fB_NAME\fR
+.br
+.RS 0.4i
+This property stores the type of the array. For example, if you had an array structure
+declared as \fBMyArray\fR, you would set this property to \fBstruct MyArray\fR, or if it was
+declared with a typedef, just \fBMyArray\fR.
+.RE
+
+
+\fB_FREE\fR
+.RS 0.4i
+This property is a 'callback' macro that describes how an element of the array should be
+released from memory. The first argument is the value to release from memory. For example,
+if you had an array of heap-allocated strings, and you wanted to to release them from memory,
+you could define the array as \fBfree($1)\fR, which will invoke the \fBfree\fR(3) function over
+an element of the array.
+.RE
+
+
+\fB_REUSE\fR
+.RS 0.4i
+This property is a callback macro, that when defined, puts any array that uses this
+namespace into \fBmemory reuse mode\fR. This mode allows for telling m4array how to
+reuse an element in an array. The operation should take into account \fIreseting\fR the
+element it's given before reusing it. This property accepts two arguments-- \fB$1\fR is
+the element to be overwritten, and \fB$2\fR new value that should be held in the element
+For example, say that you had an array of heap allocated strings that was being used.
+You could "reset" the string buffer by setting the first character as 0x0, and then
+write to the string with \fBstrcat\fR(3). For example, \fB($2)[0]; strcat($2, $1)\fR.
+
+
+.SH  COMPILATION NOTES
+.RE
+ 0.4
+Some properties also take \fBarguments\fR. The ones that do should be treated as simple
+\fBm4\fR(1) macros, and so the argument semantics should be treated the same as any normal
+\fBm4\fR(1) macro. \fB$1\fR is the first argument \fB$2\fR the second, \fB$@\fR is all of the arguments
+passed to the macro, etc. For a list of what arguments a property takes, please
+see the above list.
+.RSi
+.SH SEE ALSO
+cware(cware), m4array(cware)

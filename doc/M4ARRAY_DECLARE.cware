@@ -1,33 +1,19 @@
-.TH "M4ARRAY_DECLARE" "cware" "Oct 01, 2022" "" "C-Ware Manuals"
-.br
+.TH "M4ARRAY_DECLARE" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
 .SH NAME
-.br
 M4ARRAY_DECLARE - declare a new array structure
-.br
 .SH SYNOPSIS
-.br
 include(m4array/m4array.m4)
-.br
 
-.br
 \fBdefine(M4ARRAY_DECLARE);\fR
 .br
 .SH DESCRIPTION
-.br
 This will declare a new array structure of a certain name.
-.br
 
-.br
 
-.br
 \fI$1\fR will be the name of the structure
-.br
 \fI$2\fR will be the type of the array
-.br
 .SH EXAMPLES
-.br
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br
 .SH SEE ALSO
-.br
 m4array(cware)

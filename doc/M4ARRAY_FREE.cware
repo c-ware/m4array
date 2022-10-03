@@ -1,37 +1,21 @@
-.TH "M4ARRAY_FREE" "cware" "Oct 01, 2022" "" "C-Ware Manuals"
-.br
+.TH "M4ARRAY_FREE" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
 .SH NAME
-.br
 M4ARRAY_FREE - release an array and its contents from memory
-.br
 .SH SYNOPSIS
-.br
 include(m4array/m4array.m4)
-.br
 
-.br
 \fBdefine(M4ARRAY_FREE);\fR
 .br
 .SH DESCRIPTION
-.br
 This macro will apply a free-macro for each element of the array, and 
-.br
 release the array itself. The macro that will be called has the suffix
-.br
 _FREE.
-.br
 
-.br
 
-.br
 \fI$1\fR will be pointer to the array to release
-.br
 \fI$2\fR will be the namespace of the array
-.br
 .SH EXAMPLES
-.br
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br
 .SH SEE ALSO
-.br
 m4array(cware)

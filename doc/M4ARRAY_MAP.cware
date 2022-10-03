@@ -1,37 +1,21 @@
-.TH "M4ARRAY_MAP" "cware" "Oct 01, 2022" "" "C-Ware Manuals"
-.br
+.TH "M4ARRAY_MAP" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
 .SH NAME
-.br
 M4ARRAY_MAP - apply an operation to each element of an array
-.br
 .SH SYNOPSIS
-.br
 include(m4array/m4array.m4)
-.br
 
-.br
 \fBdefine(M4ARRAY_MAP);\fR
 .br
 .SH DESCRIPTION
-.br
 This macro will apply an operation on each member of an array. The macro
-.br
 is in-place, and will a[i] with the output of f(x), where a[i] is any
-.br
 given array element, and f(x) is a macro which uses a[i].
-.br
 
-.br
 
-.br
 \fI$1\fR will be pointer to the array to map to
-.br
 \fI$2\fR will be the macro body to execute
-.br
 .SH EXAMPLES
-.br
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br
 .SH SEE ALSO
-.br
 m4array(cware)

@@ -42,16 +42,24 @@
 M4=m4
 
 CC=cc
+PREFIX=/usr/local
 CFLAGS=-Wall -Wextra -Wpedantic -Wno-unused-but-set-variable -g
 SRCS=tests/append.c tests/filter.c tests/free.c tests/clear.c tests/resize.c tests/map.c tests/pop.c tests/foreach.c tests/init.c tests/insert.c tests/find.c  
 TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
 EXAMPLES=
+DOCS=doc/M4ARRAY_INSERT.cware doc/m4array-intro.cware doc/M4ARRAY_POP.cware doc/M4ARRAY_DECLARE.cware doc/M4ARRAY_FIND.cware doc/m4array-examples-join.cware doc/M4ARRAY_FOREACH.cware doc/m4array.cware doc/M4ARRAY_INIT.cware doc/M4ARRAY_MAP.cware doc/M4ARRAY_CLEAR.cware doc/M4ARRAY_FREE.cware doc/M4ARRAY_FILTER.cware doc/M4ARRAY_APPEND.cware 
 
 all: $(SRCS) $(TESTS) $(EXAMPLES)
+
+install: maninstall
 
 clean:
 	rm -f $(TESTS)
 	rm -f $(EXAMPLES)
+
+maninstall:
+	mkdir -p $(PREFIX)/share/man/mancware
+	cp $(DOCS) $(PREFIX)/share/man/mancware
 
 dist: $(SRCS)
 
@@ -110,4 +118,5 @@ tests/find: tests/find.c
 
 
 
-.PHONY: all clean dist dist_clean
+
+.PHONY: all clean dist dist_clean install maninstall

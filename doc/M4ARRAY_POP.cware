@@ -1,45 +1,25 @@
-.TH "M4ARRAY_POP" "cware" "Oct 01, 2022" "" "C-Ware Manuals"
-.br
+.TH "M4ARRAY_POP" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
 .SH NAME
-.br
 M4ARRAY_POP - pop a value out of an array at some index
-.br
 .SH SYNOPSIS
-.br
 include(m4array/m4array.m4)
-.br
 
-.br
 \fBdefine(M4ARRAY_POP);\fR
 .br
 .SH DESCRIPTION
-.br
 This macro will pop a value out of an index in the array, and write it to a
-.br
 variable. Each value in the array after the index that is popped will be
-.br
 shifted over by one slot. Unlike many of the other operations, this operation
-.br
 will not make the popped index a reusable buffer, as the value inside of it
-.br
 will be written to the variable-- thus it is unreusable.
-.br
 
-.br
 
-.br
 \fI$1\fR will be pointer to the array to pop out of
-.br
 \fI$2\fR will be the index to pop out
-.br
 \fI$3\fR will be the variable to put the value in
-.br
 \fI$4\fR will be the namespace of the array
-.br
 .SH EXAMPLES
-.br
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br
 .SH SEE ALSO
-.br
 m4array(cware)

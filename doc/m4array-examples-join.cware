@@ -1,11 +1,7 @@
-.TH "m4array-examples-join" "cware" "Oct 01, 2022" "" "C-Ware Manuals"
-.br
+.TH "m4array-examples-join" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
 .SH NAME
-.br
 m4array-examples-join - an example for m4array, implementing a string join function
-.br
 .SH EXAMPLES
-.br
 #include <string.h>
 .br
 #include <stdlib.h>

@@ -38,18 +38,27 @@
 
 
 
-# Makefile for 4.3 BSD
+# Makefile for gemeral UNIX operating systems
 
 M4=m4
 
 CC=cc
 CFLAGS=
+PREFIX=/usr/local
 TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
+DOCS=doc/M4ARRAY_INSERT.cware doc/m4array-intro.cware doc/M4ARRAY_POP.cware doc/M4ARRAY_DECLARE.cware doc/M4ARRAY_FIND.cware doc/m4array-examples-join.cware doc/M4ARRAY_FOREACH.cware doc/m4array.cware doc/M4ARRAY_INIT.cware doc/M4ARRAY_MAP.cware doc/M4ARRAY_CLEAR.cware doc/M4ARRAY_FREE.cware doc/M4ARRAY_FILTER.cware doc/M4ARRAY_APPEND.cware 
 
 all: $(TESTS)
 
+install: maninstall
+
+maninstall:
+	mkdir -p $(PREFIX)/share/man/mancware
+	cp $(DOCS) $(PREFIX)/share/man/mancware
+
 clean:
 	rm -f $(TESTS)
+	rm -f $(EXAMPLES)
 
 .SUFFIXES:
 
@@ -77,4 +86,4 @@ tests/pop: tests/pop.c
 	$(CC) tests/pop.c $(CFLAGS) -o tests/pop
 
 
-.PHONY: all clean
+.PHONY: all clean install maninstall

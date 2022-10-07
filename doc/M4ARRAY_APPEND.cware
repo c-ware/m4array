@@ -1,8 +1,9 @@
-.TH "M4ARRAY_APPEND" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_APPEND" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_APPEND - append to an array
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_APPEND);\fR
 .br
@@ -15,8 +16,11 @@ array itself.
 
 
 \fI$1\fR will be pointer to the array to append to
+.br
 \fI$2\fR will be the value to append
+.br
 \fI$3\fR will be the namespace of the array
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

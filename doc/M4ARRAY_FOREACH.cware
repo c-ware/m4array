@@ -1,8 +1,9 @@
-.TH "M4ARRAY_FOREACH" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_FOREACH" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_FOREACH - run code for each element in an array
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_FOREACH);\fR
 .br
@@ -13,7 +14,9 @@ argument.
 
 
 \fI$1\fR will be pointer to the array to loop over
+.br
 \fI$2\fR will be the macro to execute for each element
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

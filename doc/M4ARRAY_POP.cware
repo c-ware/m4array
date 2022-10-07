@@ -1,8 +1,9 @@
-.TH "M4ARRAY_POP" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_POP" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_POP - pop a value out of an array at some index
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_POP);\fR
 .br
@@ -15,9 +16,13 @@ will be written to the variable-- thus it is unreusable.
 
 
 \fI$1\fR will be pointer to the array to pop out of
+.br
 \fI$2\fR will be the index to pop out
+.br
 \fI$3\fR will be the variable to put the value in
+.br
 \fI$4\fR will be the namespace of the array
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

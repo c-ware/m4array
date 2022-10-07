@@ -1,8 +1,9 @@
-.TH "M4ARRAY_FIND" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_FIND" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_FIND - find the first occurrence of a value
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_FIND);\fR
 .br
@@ -14,8 +15,11 @@ output variable. Otherwise, the index is written to it.
 
 
 \fI$1\fR will be pointer to the array to search
+.br
 \fI$2\fR will be the variable to put the index into
+.br
 \fI$3\fR will be the macro body to execute
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

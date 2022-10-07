@@ -1,8 +1,9 @@
-.TH "m4array" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "m4array" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 m4array - an implementation of a dynamic array in m4
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_INIT);\fR
 .br

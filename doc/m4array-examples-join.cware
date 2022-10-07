@@ -1,4 +1,4 @@
-.TH "m4array-examples-join" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "m4array-examples-join" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 m4array-examples-join - an example for m4array, implementing a string join function
 .SH EXAMPLES

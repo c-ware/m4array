@@ -1,4 +1,4 @@
-.TH "m4array-intro" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "m4array-intro" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 m4array-intro - a basic introduction to m4array
 .SH SYNOPSIS
@@ -21,8 +21,8 @@ An explanation of what callback macros are, and how they work.
 An explanation of data structure properties, lists of data structure properties, etc
 .RE
 
-.RS 0.4i
 \fBCOMPILATION NOTES\fR
+.RS 0.4i
 Notes about compiling on stranger operating systems like ULTRIX and QuasiBSD.
 .RE
 
@@ -138,16 +138,18 @@ the element to be overwritten, and \fB$2\fR new value that should be held in the
 For example, say that you had an array of heap allocated strings that was being used.
 You could "reset" the string buffer by setting the first character as 0x0, and then
 write to the string with \fBstrcat\fR(3). For example, \fB($2)[0]; strcat($2, $1)\fR.
+.RE
+
 
 
 .SH  COMPILATION NOTES
-.RE
- 0.4
+.RS 0.4i
 Some properties also take \fBarguments\fR. The ones that do should be treated as simple
 \fBm4\fR(1) macros, and so the argument semantics should be treated the same as any normal
 \fBm4\fR(1) macro. \fB$1\fR is the first argument \fB$2\fR the second, \fB$@\fR is all of the arguments
 passed to the macro, etc. For a list of what arguments a property takes, please
 see the above list.
-.RSi
+.RE
+
 .SH SEE ALSO
 cware(cware), m4array(cware)

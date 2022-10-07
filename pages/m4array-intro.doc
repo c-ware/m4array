@@ -19,8 +19,8 @@
 @\R 0.4
 @An explanation of data structure properties, lists of data structure properties, etc
 @\R
-@\R 0.4
 @\BCOMPILATION NOTES\B
+@\R 0.4
 @Notes about compiling on stranger operating systems like ULTRIX and QuasiBSD.
 @\R
 @synopsis
@@ -125,6 +125,7 @@
 @For example, say that you had an array of heap allocated strings that was being used.
 @You could "reset" the string buffer by setting the first character as 0x0, and then
 @write to the string with \Bstrcat\B(3). For example, \B($2)[0]; strcat($2, $1)\B.
+@\R
 @
 @\M COMPILATION NOTES
 @\R 0.4

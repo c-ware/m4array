@@ -1,8 +1,9 @@
-.TH "M4ARRAY_FILTER" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_FILTER" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_FILTER - filter all elements which do not match a predicate
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_FILTER);\fR
 .br
@@ -15,8 +16,11 @@ those values will be made reusable.
 
 
 \fI$1\fR will be pointer to the array to filter to
+.br
 \fI$2\fR will be the namespace of the array
+.br
 \fI$3\fR will be the macro body to execute
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

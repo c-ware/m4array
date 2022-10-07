@@ -1,8 +1,9 @@
-.TH "M4ARRAY_FREE" "cware" "Oct 03, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_FREE" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_FREE - release an array and its contents from memory
 .SH SYNOPSIS
 include(m4array/m4array.m4)
+.br
 
 \fBdefine(M4ARRAY_FREE);\fR
 .br
@@ -13,7 +14,9 @@ _FREE.
 
 
 \fI$1\fR will be pointer to the array to release
+.br
 \fI$2\fR will be the namespace of the array
+.br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
 .br

@@ -143,13 +143,10 @@ write to the string with \fBstrcat\fR(3). For example, \fB($2)[0]; strcat($2, $1
 
 
 .SH  COMPILATION NOTES
-.RS 0.4i
 Some properties also take \fBarguments\fR. The ones that do should be treated as simple
 \fBm4\fR(1) macros, and so the argument semantics should be treated the same as any normal
 \fBm4\fR(1) macro. \fB$1\fR is the first argument \fB$2\fR the second, \fB$@\fR is all of the arguments
 passed to the macro, etc. For a list of what arguments a property takes, please
 see the above list.
-.RE
-
 .SH SEE ALSO
 cware(cware), m4array(cware)

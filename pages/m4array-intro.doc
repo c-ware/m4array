@@ -128,13 +128,11 @@
 @\R
 @
 @\M COMPILATION NOTES
-@\R 0.4
 @Some properties also take \Barguments\B. The ones that do should be treated as simple
 @\Bm4\B(1) macros, and so the argument semantics should be treated the same as any normal
 @\Bm4\B(1) macro. \B$1\B is the first argument \B$2\B the second, \B$@\B is all of the arguments
 @passed to the macro, etc. For a list of what arguments a property takes, please
 @see the above list.
-@\R
 @description
 
 @reference: cware(cware)

@@ -1,4 +1,4 @@
-.TH "M4ARRAY_MAP" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_MAP" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_MAP - apply an operation to each element of an array
 .SH SYNOPSIS
@@ -19,6 +19,5 @@ given array element, and f(x) is a macro which uses a[i].
 .br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
-.br
 .SH SEE ALSO
 m4array(cware)

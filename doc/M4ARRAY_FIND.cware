@@ -1,4 +1,4 @@
-.TH "M4ARRAY_FIND" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_FIND" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_FIND - find the first occurrence of a value
 .SH SYNOPSIS
@@ -22,6 +22,5 @@ output variable. Otherwise, the index is written to it.
 .br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
-.br
 .SH SEE ALSO
 m4array(cware)

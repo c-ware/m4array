@@ -42,7 +42,7 @@
 @m4array is designed, first and foremost, for people who want to write \Ihyper\I
 @portable code. As such, it is the assumption that before the code is shipped, you
 @preprocess the code with \Bm4\B(1), This allows us-- people writing code on modern
-@systems, to use convenient macro features without worrying about these older systems
+@systems-- to use convenient macro features without worrying about these older systems
 @supporting our preprocessor of choice.
 @
 @\M CALLBACK MACROS
@@ -67,13 +67,7 @@
 @had an array of heap-allocated strings, which should all be released from memory when
 @the array is released. If we wanted to \Binitialize\B, and \Bfree\B the array, we would
 @need to define a collections of macros which end in the suffixes \B_TYPE\B, \B_NAME\B,
-@and \B_FREE\B respectively. For example:
-@
-@\M COMPILATION NOTES
-@Some of the operating systems that m4array will compile under need a specific macro
-@defined for the code to be compiled correctly on that operating system. If you are
-@targeting any of the following operating systems, please define the corresponding
-@macro to make sure m4array knows what operating system it is on.
+@and \B_FREE\B respectively.
 @
 @define(`STRING_ARRAY_TYPE', `char *')\N
 @define(`STRING_ARRAY_NAME', `struct StringArray')\N
@@ -96,7 +90,7 @@
 @\R 0.4
 @This property stores the type of data stored in the array. For example, if you wanted
 @to store an array of pointers to integers, \Bint *\B would be stored. Or, if you wanted
-@an array of structures named \BMyStruct\B, you could have the type bf \Bstruct MyStruct\B.
+@an array of structures named \BMyStruct\B, you could have the type of \Bstruct MyStruct\B.
 @\R
 @
 @\B_NAME\B\N
@@ -128,11 +122,16 @@
 @\R
 @
 @\M COMPILATION NOTES
-@Some properties also take \Barguments\B. The ones that do should be treated as simple
-@\Bm4\B(1) macros, and so the argument semantics should be treated the same as any normal
-@\Bm4\B(1) macro. \B$1\B is the first argument \B$2\B the second, \B$@\B is all of the arguments
-@passed to the macro, etc. For a list of what arguments a property takes, please
-@see the above list.
+@Some of the operating systems that m4array will compile under need a specific macro
+@defined for the code to be compiled correctly on that operating system. If you are
+@targeting any of the following operating systems, please define the corresponding
+@macro to make sure m4array knows what operating system it is on.
+@\T
+@\S ;
+@\H Operating System;Macro
+@\E ULTRIX;__ULTRIX__
+@\E QuasiBSD;__QuasiBSD__
+@\T
 @description
 
 @reference: cware(cware)

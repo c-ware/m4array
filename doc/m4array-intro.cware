@@ -1,4 +1,4 @@
-.TH "m4array-intro" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "m4array-intro" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 m4array-intro - a basic introduction to m4array
 .SH SYNOPSIS
@@ -44,7 +44,7 @@ on pretty much every UNIX system-- including ancient ones like ULTRIX, and 4.3 B
 m4array is designed, first and foremost, for people who want to write \fIhyper\fR
 portable code. As such, it is the assumption that before the code is shipped, you
 preprocess the code with \fBm4\fR(1), This allows us-- people writing code on modern
-systems, to use convenient macro features without worrying about these older systems
+systems-- to use convenient macro features without worrying about these older systems
 supporting our preprocessor of choice.
 
 
@@ -71,14 +71,7 @@ which is used to access information about that data structure. As an example, sa
 had an array of heap-allocated strings, which should all be released from memory when
 the array is released. If we wanted to \fBinitialize\fR, and \fBfree\fR the array, we would
 need to define a collections of macros which end in the suffixes \fB_TYPE\fR, \fB_NAME\fR,
-and \fB_FREE\fR respectively. For example:
-
-
-.SH  COMPILATION NOTES
-Some of the operating systems that m4array will compile under need a specific macro
-defined for the code to be compiled correctly on that operating system. If you are
-targeting any of the following operating systems, please define the corresponding
-macro to make sure m4array knows what operating system it is on.
+and \fB_FREE\fR respectively.
 
 define(`STRING_ARRAY_TYPE', `char *')
 .br
@@ -105,7 +98,7 @@ operation, check the notes section of its manual page for what macros it uses.
 .RS 0.4i
 This property stores the type of data stored in the array. For example, if you wanted
 to store an array of pointers to integers, \fBint *\fR would be stored. Or, if you wanted
-an array of structures named \fBMyStruct\fR, you could have the type bf \fBstruct MyStruct\fR.
+an array of structures named \fBMyStruct\fR, you could have the type of \fBstruct MyStruct\fR.
 .RE
 
 
@@ -143,10 +136,19 @@ write to the string with \fBstrcat\fR(3). For example, \fB($2)[0]; strcat($2, $1
 
 
 .SH  COMPILATION NOTES
-Some properties also take \fBarguments\fR. The ones that do should be treated as simple
-\fBm4\fR(1) macros, and so the argument semantics should be treated the same as any normal
-\fBm4\fR(1) macro. \fB$1\fR is the first argument \fB$2\fR the second, \fB$@\fR is all of the arguments
-passed to the macro, etc. For a list of what arguments a property takes, please
-see the above list.
+Some of the operating systems that m4array will compile under need a specific macro
+defined for the code to be compiled correctly on that operating system. If you are
+targeting any of the following operating systems, please define the corresponding
+macro to make sure m4array knows what operating system it is on.
+.TS
+tab(;);
+l l l
+_ _ _
+l l l
+.
+Operating System;Macro
+ULTRIX;__ULTRIX__
+QuasiBSD;__QuasiBSD__
+.TE
 .SH SEE ALSO
 cware(cware), m4array(cware)

@@ -1,4 +1,4 @@
-.TH "M4ARRAY_INSERT" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_INSERT" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_INSERT - insert a value into an array at an index
 .SH SYNOPSIS
@@ -25,6 +25,5 @@ array.
 .br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
-.br
 .SH SEE ALSO
 m4array(cware)

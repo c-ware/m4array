@@ -4,14 +4,14 @@ dnl @name: m4array-examples-join
 dnl @brief: an example for m4array, implementing a string join function
 dnl
 dnl @examples
-dnl @#include <string.h>
+dnl @#include <string.h>\N
 dnl @#include <stdlib.h>
 dnl @
 dnl @include(src/m4array.m4)
 dnl @
-dnl @define(`STRING_ARRAY_TYPE', `char *')
-dnl @define(`STRING_ARRAY_FREE', `') // String literals cannot be freed
-dnl @define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')
+dnl @define(`STRING_ARRAY_TYPE', `char *')\N
+dnl @define(`STRING_ARRAY_FREE', `') // String literals cannot be freed\N
+dnl @define(`STRING_ARRAY_ARRAY_TYPE', `struct StringArray')\N
 dnl @
 dnl @M4ARRAY_DECLARE(StringArray, char *);
 dnl @
@@ -28,7 +28,7 @@ dnl @
 dnl @       strcat(my_string, $1);
 dnl @   ');
 dnl @
-dnl @   return my_string;
+dnl @   return my_string;\N
 dnl @}
 dnl @
 dnl @int main() {
@@ -48,7 +48,7 @@ dnl @
 dnl @   free(joined_string);
 dnl @   M4ARRAY_FREE(my_array, STRING_ARRAY);
 dnl @
-dnl @   return 0;
+dnl @   return 0;\N
 dnl @}
 dnl @examples
 dnl

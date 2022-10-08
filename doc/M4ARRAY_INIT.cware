@@ -1,4 +1,4 @@
-.TH "M4ARRAY_INIT" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "M4ARRAY_INIT" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 M4ARRAY_INIT - initialize a new array
 .SH SYNOPSIS
@@ -18,6 +18,5 @@ by M4ARRAY_INITIAL_LENGTH, and must be released from memory using \fBM4ARRAY_FRE
 .br
 .SH EXAMPLES
 For examples, please see the examples section in \fBm4array\fR(cware)
-.br
 .SH SEE ALSO
 m4array(cware)

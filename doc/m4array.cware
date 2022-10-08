@@ -1,4 +1,4 @@
-.TH "m4array" "cware" "Oct 07, 2022" "" "C-Ware Manuals"
+.TH "m4array" "cware" "Oct 08, 2022" "" "C-Ware Manuals"
 .SH NAME
 m4array - an implementation of a dynamic array in m4
 .SH SYNOPSIS
@@ -66,24 +66,16 @@ M4ARRAY_DECLARE(cware);declare a new array structure
 .TE
 .SH EXAMPLES
 This is a table of documentation which holds example code, along with a
-.br
 brief description of it, and the macros it involves.
-.br
 
-.br
 .TS
-.br
 tab(;);
 l l l
 _ _ _
 l l l
 .
-.br
 Manual;Description;Macros
-.br
 m4array-examples-join(cware);joining strings;init,foreach,append,free
-.br
 .TE
-.br
 .SH SEE ALSO
 m4array-intro(cware)

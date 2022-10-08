@@ -43,7 +43,7 @@
 M4=m4
 
 CC=cc
-CFLAGS=-D__QuasiBSD__
+CFLAGS=-D__QuasiBSD__ -DLIBERROR_ENABLED -DLIBERROR_STREAM=stderr
 TESTS=tests/append tests/filter tests/free tests/clear tests/resize tests/map tests/pop tests/foreach tests/init tests/insert tests/find 
 
 all: $(TESTS)

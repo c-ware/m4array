@@ -45,6 +45,21 @@
 @systems-- to use convenient macro features without worrying about these older systems
 @supporting our preprocessor of choice.
 @
+@One of the more inconvenient parts of using m4array is its integration with
+@\Bliberror\B(cware). You do not \Bneed\B to use liberror in m4array, as if
+@\BLIBERROR_ENABLED\B is not defined, it will not attempt to expand the safety
+@check macros, like out of bounds checks.
+@
+@This being said, it is still recommended that you use them. So, if you do decide
+@to use them, all you need to do is make sure that each file that uses m4array
+@has access to the liberror macros. I would suggest using a "central header" for
+@your project, which includes all the other headers.
+@
+@Other than that, since m4array is written in m4, you will need to have the m4
+@preprocessor on your box. While you most likely do, it might be less work on
+@the end of the user for you to \Bpreprocess\B your C code  with m4 before
+@shipping it. Otherwise, you can preprocess it while building.
+@
 @\M CALLBACK MACROS
 @In m4array, some operations take a sort of inline-callback macro. For example, \BM4ARRAY_FIND\B(cware)
 @will take a predicate as an argument. This callback can be a pre-defined macro, or it can be declared
@@ -52,7 +67,7 @@
 @be described in the operation's manual page. However, as a reference, this is an example of using the
 @\BM4ARRAY_FIND\B(cware) operation with an inline-predicate in a heap-allocated array of strings.
 @
-@\Bindex = M4ARRAY_FIND(my_array, STRING_ARRAY, `strcmp($1, "foo") == 0')\B
+@\BM4ARRAY_FIND(my_array, index, `strcmp($1, "foo") == 0')\B
 @
 @This will find the first occurrence of the string "foo" in the array. It is recommended to put your
 @predicates inside whatever you decide to be your M4 string quotes. By default it is a backtick and a

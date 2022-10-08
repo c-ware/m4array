@@ -5,7 +5,7 @@ M4=m4
 CC=cc
 CPP=/lib/cpp
 CFLAGS=
-CPPFLAGS=-I/usr/include
+CPPFLAGS=-I/usr/include -DLIBERROR_ENABLED -DLIBERROR_STREAM=stderr
 TESTS=CONVERT_FILES(tests, .m4c)
 DOCS=CONVERT_FILES(doc, .cware, .cware)
 

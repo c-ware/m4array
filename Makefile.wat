@@ -50,7 +50,7 @@ M4=m4
 
 CC=wcc386
 LD=wlink
-CFLAGS=
+CFLAGS=-dLIBERROR_ENABLED -dLIBERROR_STREAM=stderr
 TESTS=tests\resize.exe tests\foreach.exe tests\append.exe tests\filter.exe tests\init.exe tests\clear.exe tests\map.exe tests\find.exe tests\insert.exe tests\free.exe tests\pop.exe 
 
 all: $(TESTS) .symbolic

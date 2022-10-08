@@ -5,7 +5,7 @@ M4=m4
 
 CC=cc
 PREFIX=/usr/local
-CFLAGS=-Wall -Wextra -Wpedantic -Wno-unused-but-set-variable -g
+CFLAGS=-Wall -Wextra -Wpedantic -Wno-unused-but-set-variable -g -DLIBERROR_ENABLED -DLIBERROR_STREAM=stderr
 SRCS=CONVERT_FILES(tests, .m4c, .c) CONVERT_FILES(examples, .m4c, .c)
 TESTS=CONVERT_FILES(tests, .m4c)
 EXAMPLES=CONVERT_FILES(examples, .m4c)

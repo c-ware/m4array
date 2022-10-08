@@ -34,7 +34,7 @@ void test_pop() {
     M4ARRAY_APPEND(array, f, STRING_ARRAY);
 
     /* Pop some values out of the array */
-    storage = M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
 
     ASSERT_NUMEQ(array->length, 5);
     ASSERT_NUMEQ(array->used, 5);
@@ -46,7 +46,7 @@ void test_pop() {
     ASSERT_STREQ(array->contents[3], "spam");
     ASSERT_STREQ(array->contents[4], "thud");
 
-    storage = M4ARRAY_POP(array, 1, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 1, storage, STRING_ARRAY);
 
     ASSERT_NUMEQ(array->length, 4);
     ASSERT_NUMEQ(array->used, 4);
@@ -57,7 +57,7 @@ void test_pop() {
     ASSERT_STREQ(array->contents[2], "spam");
     ASSERT_STREQ(array->contents[3], "thud");
 
-    storage = M4ARRAY_POP(array, 2, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 2, storage, STRING_ARRAY);
 
     ASSERT_NUMEQ(array->length, 3);
     ASSERT_NUMEQ(array->used, 3);
@@ -102,22 +102,22 @@ void test_pop_doesnt_produce_reusable_blocks() {
     M4ARRAY_APPEND(array, f, STRING_ARRAY);
 
     /* Used should stay consistent with the length */
-    storage = M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
     assert(array->length == 5);
     assert(array->used == 5);
 
     /* Does it stay consistent when popping from the end? */
-    storage = M4ARRAY_POP(array, 4, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 4, storage, STRING_ARRAY);
     assert(array->length == 4);
     assert(array->used == 4);
 
     /* What about with memory reuse enabled? */
-    storage = M4ARRAY_POP(array, 3, storage, STRING_ARRAY_RE);
+    M4ARRAY_POP(array, 3, storage, STRING_ARRAY_RE);
     assert(array->length == 3);
     assert(array->used == 3);
 
     /* What about with memory reuse enabled? */
-    storage = M4ARRAY_POP(array, 0, storage, STRING_ARRAY_RE);
+    M4ARRAY_POP(array, 0, storage, STRING_ARRAY_RE);
     assert(array->length == 2);
     assert(array->used == 2);
 
@@ -174,15 +174,15 @@ void test_pop_shifts_reusable_sections() {
     /* Simulate 2 reusable memory slots */
     array->used = 5;
 
-    storage = M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 0, storage, STRING_ARRAY);
     ASSERT_NUMEQ(array->length, 6);
     ASSERT_NUMEQ(array->used, 4);
 
-    storage = M4ARRAY_POP(array, 2, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 2, storage, STRING_ARRAY);
     ASSERT_NUMEQ(array->length, 5);
     ASSERT_NUMEQ(array->used, 3);
 
-    storage = M4ARRAY_POP(array, 1, storage, STRING_ARRAY);
+    M4ARRAY_POP(array, 1, storage, STRING_ARRAY);
     ASSERT_NUMEQ(array->length, 4);
     ASSERT_NUMEQ(array->used, 2);
 

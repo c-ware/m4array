@@ -56,6 +56,8 @@
 
 
 
+
+
     struct IntArray {
         int used;
         int length;
@@ -94,18 +96,42 @@ void test_free() {
     struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
 			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
@@ -120,11 +146,26 @@ void test_free_with_items() {
     struct StringArray *array = (struct StringArray *) CWUTILS_NULL;
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     array->contents[0] = (char *) malloc(16);
@@ -143,10 +184,19 @@ void test_free_with_items() {
     array->used++;
 
     
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
 			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}

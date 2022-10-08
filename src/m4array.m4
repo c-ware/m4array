@@ -143,13 +143,28 @@ dnl ==========================
 dnl	# M4array utility macros #
 dnl ==========================
 
+dnl Verify that an array object is not in an
+dnl invalid state.
+define(`M4ARRAY_VERIFY', `
+    LIBERROR_IS_NULL(($1), "($1)");
+    LIBERROR_IS_NULL(($1)->contents, "($1)->contents");
+    LIBERROR_IS_NEGATIVE(($1)->used, "($1)->used");
+    LIBERROR_IS_NEGATIVE(($1)->length, "($1)->length");
+    LIBERROR_IS_NEGATIVE(($1)->capacity, "($1)->capacity")
+')
+
 define(`M4ARRAY_INITIAL_LENGTH', `3')
 define(`M4ARRAY_NEXT_SIZE', `(($1)->capacity * 2)')
 define(`__M4ARRAY_RESIZE', `
+M4ARRAY_VERIFY($1);
+
 do {
 	if((($1)->length == ($1)->capacity) && (($1)->used == ($1)->length)) {
 		($1)->contents = ($2_TYPE *) realloc(($1)->contents, sizeof($2_TYPE) * M4ARRAY_NEXT_SIZE($1));
 		($1)->capacity = M4ARRAY_NEXT_SIZE($1);
+
+        LIBERROR_IS_NEGATIVE(($1)->capacity, "($1)->capacity");
+        LIBERROR_MALLOC_FAILURE(($1)->contents, "($1)->contents");
 	}
 } while(0)
 ')
@@ -214,11 +229,20 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_INIT', `
-	($2_NAME *) malloc(sizeof(*($1)));
+    CWUTILS_NULL;
+
+	($1) = ($2_NAME *) malloc(sizeof(*($1)));
 	($1)->used = 0;
 	($1)->length = 0;
+
+    LIBERROR_IS_NULL(($1), "($1)");
+    LIBERROR_IS_NEGATIVE(($1)->used, "($1)->used");
+    LIBERROR_IS_NEGATIVE(($1)->length, "($1)->length");
+
 	($1)->capacity = M4ARRAY_INITIAL_LENGTH;
-	($1)->contents = ($2_TYPE *) malloc(sizeof($2_TYPE) * M4ARRAY_INITIAL_LENGTH)
+	($1)->contents = ($2_TYPE *) malloc(sizeof($2_TYPE) * M4ARRAY_INITIAL_LENGTH);
+
+    M4ARRAY_VERIFY($1)
 ')
 
 dnl @docgen_start
@@ -254,6 +278,8 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_APPEND', `
     __M4ARRAY_RESIZE($1, $3);
+
+    M4ARRAY_VERIFY($1);
 
     /* If used < length, that means we have data in the array that
        is currently unused, but initialized. We can reuse it. Otherwise,
@@ -304,6 +330,8 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_INSERT', `
     __M4ARRAY_RESIZE($1, $4);
+
+    M4ARRAY_VERIFY($1);
 
 	do {
 		int __M4_INDEX = ($1)->used - 1;
@@ -368,7 +396,7 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_POP', `
-	($1)->contents[0];
+    M4ARRAY_VERIFY($1);
 
 	($3) = ($1)->contents[$2];
 
@@ -419,7 +447,7 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_FIND', `
-	-1;
+    M4ARRAY_VERIFY($1);
 
 	($2) = -1;
 
@@ -429,6 +457,8 @@ define(`M4ARRAY_FIND', `
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < ($1)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
+
 			if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 0) {
 				__M4_INDEX++;
 				continue;
@@ -468,11 +498,13 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_MAP', `
 	define(`M4ARRAY_LAMBDA', `$2')
+    M4ARRAY_VERIFY($1);
 
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < ($1)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
 			($1)->contents[__M4_INDEX] = (M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]));
             __M4_INDEX++;
 		}
@@ -532,12 +564,16 @@ dnl that passed the filter will be in the range [0, L), and each element that
 dnl did not pass the filter will be from range [L, len(A))
 define(`M4ARRAY_FILTER', `
 	define(`M4ARRAY_LAMBDA', `$3')
+    M4ARRAY_VERIFY($1);
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < ($1)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, ($1)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX])) == 1) {
                 $2_TYPE __M4_TEMP = ($1)->contents[__M4_CURSOR];
@@ -563,9 +599,13 @@ define(`M4ARRAY_FILTER', `
             __M4_INDEX = __M4_CURSOR;
 
             while(__M4_INDEX < ($1)->length) {
+                LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
+
                 $2_FREE(($1)->contents[__M4_INDEX]);
                 __M4_INDEX++;
             }
+
+            LIBERROR_IS_OOB(__M4_CURSOR, ($1)->length);
 
             ($1)->length = __M4_CURSOR;
             ($1)->used = __M4_CURSOR;
@@ -601,6 +641,8 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_CLEAR', `
+    M4ARRAY_VERIFY($1);
+
 	do {
         /* We only need to release the contents of the array if
            we do not want to reuse memory. If we do want to reuse
@@ -611,6 +653,8 @@ define(`M4ARRAY_CLEAR', `
 		    int __M4_INDEX = 0;
 
 		    while(__M4_INDEX < ($1)->used) {
+                LIBERROR_IS_OOB(__M4_INDEX, ($1)->used);
+
 		    	$2_FREE(($1)->contents[__M4_INDEX]);
                 __M4_INDEX++;
 		    }
@@ -653,11 +697,13 @@ dnl
 dnl @docgen_end
 define(`M4ARRAY_FOREACH', `
 	define(`M4ARRAY_LAMBDA', `$2')
+    M4ARRAY_VERIFY($1);
 
     do {
         int __M4_INDEX = 0;
 
         while(__M4_INDEX < ($1)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
             M4ARRAY_LAMBDA(($1)->contents[__M4_INDEX]);
 
             __M4_INDEX++;
@@ -692,10 +738,13 @@ dnl @reference: m4array(cware)
 dnl
 dnl @docgen_end
 define(`M4ARRAY_FREE', `
+    M4ARRAY_VERIFY($1);
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < ($1)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, ($1)->length);
 			$2_FREE(($1)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}

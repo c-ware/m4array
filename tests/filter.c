@@ -56,6 +56,8 @@
 
 
 
+
+
     struct IntArray {
         int used;
         int length;
@@ -108,21 +110,55 @@ void test_filter() {
     strcpy(f, "thud"); 
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -139,12 +175,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -161,12 +216,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -183,12 +257,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -205,12 +298,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -227,12 +339,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -251,12 +382,22 @@ do {
     /* Filter out strings that begin with b */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((((array)->contents[__M4_INDEX])[0] != "b"[0]) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -282,9 +423,13 @@ do {
             __M4_INDEX = __M4_CURSOR;
 
             while(__M4_INDEX < (array)->length) {
+                LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+
                 free((array)->contents[__M4_INDEX]);
                 __M4_INDEX++;
             }
+
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
 
             (array)->length = __M4_CURSOR;
             (array)->used = __M4_CURSOR;
@@ -302,12 +447,22 @@ do {
     /* Filter out strings that do not begin with with a t */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((((array)->contents[__M4_INDEX])[0] == "t"[0]) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -333,9 +488,13 @@ do {
             __M4_INDEX = __M4_CURSOR;
 
             while(__M4_INDEX < (array)->length) {
+                LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+
                 free((array)->contents[__M4_INDEX]);
                 __M4_INDEX++;
             }
+
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
 
             (array)->length = __M4_CURSOR;
             (array)->used = __M4_CURSOR;
@@ -349,10 +508,19 @@ do {
     ASSERT_STREQ(array->contents[1], "thud");
 
     
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
 			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
@@ -381,21 +549,55 @@ void test_filter_with_reusable_memory() {
     strcpy(f, "thud"); 
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -412,12 +614,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -434,12 +655,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -456,12 +696,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -478,12 +737,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -500,12 +778,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -524,12 +821,22 @@ do {
     /* Filter out strings that begin with b */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((((array)->contents[__M4_INDEX])[0] != "b"[0]) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -565,12 +872,22 @@ do {
     /* Filter out strings that do not begin with with a t */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((((array)->contents[__M4_INDEX])[0] == "t"[0]) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -602,10 +919,19 @@ do {
     ASSERT_STREQ(array->contents[1], "thud");
 
     
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
 			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
@@ -637,21 +963,55 @@ void test_filter_respects_used_bounds() {
     strcpy(f, "thud"); 
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -668,12 +1028,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -690,12 +1069,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -712,12 +1110,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -734,12 +1151,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -756,12 +1192,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -783,12 +1238,22 @@ do {
 
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((((array)->contents[__M4_INDEX])[0] == "t"[0]) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -817,10 +1282,19 @@ do {
     ASSERT_NUMEQ(array->used, 0);
 
     
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 	do {
 		int __M4_INDEX = 0;
 
 		while(__M4_INDEX < (array)->length) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
 			free((array)->contents[__M4_INDEX]);
 			__M4_INDEX++;
 		}
@@ -852,21 +1326,55 @@ void test_filter_doesnt_modify_used_array_elements() {
     strcpy(f, "thud"); 
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -883,12 +1391,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -905,12 +1432,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -927,12 +1473,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -949,12 +1514,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -971,12 +1555,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -995,12 +1598,22 @@ do {
     /* Filter out all strings with a length of 3 */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((strlen((array)->contents[__M4_INDEX]) != 3) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];
@@ -1026,9 +1639,13 @@ do {
             __M4_INDEX = __M4_CURSOR;
 
             while(__M4_INDEX < (array)->length) {
+                LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+
                 free((array)->contents[__M4_INDEX]);
                 __M4_INDEX++;
             }
+
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
 
             (array)->length = __M4_CURSOR;
             (array)->used = __M4_CURSOR;
@@ -1070,21 +1687,55 @@ void test_filter_doesnt_modify_unused_array_elements() {
     strcpy(f, "thud"); 
 
     array = 
-	(struct StringArray *) malloc(sizeof(*(array)));
+    CWUTILS_NULL;
+
+	(array) = (struct StringArray *) malloc(sizeof(*(array)));
 	(array)->used = 0;
 	(array)->length = 0;
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+
 	(array)->capacity = 3;
-	(array)->contents = (char * *) malloc(sizeof(char *) * 3)
+	(array)->contents = (char * *) malloc(sizeof(char *) * 3);
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+
 ;
 
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1101,12 +1752,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1123,12 +1793,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1145,12 +1834,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1167,12 +1875,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1189,12 +1916,31 @@ do {
 ;
     
     
+
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
+
 do {
 	if(((array)->length == (array)->capacity) && ((array)->used == (array)->length)) {
 		(array)->contents = (char * *) realloc((array)->contents, sizeof(char *) * ((array)->capacity * 2));
 		(array)->capacity = ((array)->capacity * 2);
+
+        LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity");
+        LIBERROR_MALLOC_FAILURE((array)->contents, "(array)->contents");
 	}
 } while(0)
+;
+
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
 ;
 
     /* If used < length, that means we have data in the array that
@@ -1213,12 +1959,22 @@ do {
     /* Filter out all strings with a length of 3 */
     
 	
+    
+    LIBERROR_IS_NULL((array), "(array)");
+    LIBERROR_IS_NULL((array)->contents, "(array)->contents");
+    LIBERROR_IS_NEGATIVE((array)->used, "(array)->used");
+    LIBERROR_IS_NEGATIVE((array)->length, "(array)->length");
+    LIBERROR_IS_NEGATIVE((array)->capacity, "(array)->capacity")
+;
 
 	do {
 		int __M4_INDEX = 0;
         int __M4_CURSOR = 0;
 
 		while(__M4_INDEX < (array)->used) {
+            LIBERROR_IS_OOB(__M4_INDEX, (array)->length);
+            LIBERROR_IS_OOB(__M4_CURSOR, (array)->length);
+
             /* A[I] matches the predicate-- swap A[I] and A[L]*/
             if((strlen((array)->contents[__M4_INDEX]) != 3) == 1) {
                 char * __M4_TEMP = (array)->contents[__M4_CURSOR];

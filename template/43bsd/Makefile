@@ -3,7 +3,7 @@
 M4=m4
 
 CC=cc
-CFLAGS=-D__QuasiBSD__
+CFLAGS=-D__QuasiBSD__ -DLIBERROR_ENABLED -DLIBERROR_STREAM=stderr
 TESTS=CONVERT_FILES(tests, .m4c)
 
 all: $(TESTS)

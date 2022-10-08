@@ -3,7 +3,7 @@
 M4=m4
 
 CC=cc
-CFLAGS=
+CFLAGS=-DLIBERROR_ENABLED -DLIBERROR_STREAM=stderr
 PREFIX=/usr/local
 TESTS=CONVERT_FILES(tests, .m4c)
 DOCS=CONVERT_FILES(doc, .cware, .cware)
